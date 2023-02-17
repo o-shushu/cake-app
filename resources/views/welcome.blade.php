@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1 class="text-2xl font-bold text-indigo-700">
-        Cake App
+        Hello From Cake App
     </h1>
 </body>
 </html>
