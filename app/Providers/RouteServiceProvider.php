@@ -35,10 +35,6 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
-                
-            // 方法は二つありますかね。RouteServiceProviderの中にコード追加する。web.phpファイルの中にauth.phpをrequireする
-            // Route::middleware('web')
-            // ->group(base_path('routes/auth.php'));
         });
     }
 
