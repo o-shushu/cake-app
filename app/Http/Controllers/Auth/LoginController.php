@@ -15,8 +15,22 @@ class LoginController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    public function showLoginPage()
     {
-        return view('auth.login');
+        return view('auth/login');
+    }
+
+    public function showRegisterPage()
+    {
+        return view('auth/register');
+    }
+
+    public function showResetPasswordPage()
+    {
+        return view('auth/reset-password');
+    }
+    public function showProductPage()
+    {
+        return view('product');
     }
 }

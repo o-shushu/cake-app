@@ -38,7 +38,7 @@
                 <div class="w-1/2 max-w-lg  mt-10 bg-gray-100 border border-gray-200 p-6 rounded-xl ">
                     <img src="{{asset('css/cafe/img/cafe4.jpg')}}" alt="">
                     <div class="flex justify-center mt-5">
-                        <a href="{{ route('product.show')}}" class="bg-yellow-400 text-white rounded py-2.5 px-4 hover:bg-yellow-500 mr-20">
+                        <a href="#" class="bg-yellow-400 text-white rounded py-2.5 px-4 hover:bg-yellow-500 mr-20">
                         GO
                         </a>
                         <button type="submit" class="bg-yellow-400 text-white rounded py-2 px-4 hover:bg-yellow-500">

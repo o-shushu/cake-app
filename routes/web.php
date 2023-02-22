@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('homepage/', function () {
+Route::get('/', function () {
     return view('welcome');
-});
-require __DIR__.'/auth.php';
+})->name('home');
+
+Route::get('/login', [LoginController::class, 'showLoginPage'])->name('login.show');
+Route::get('/register', [LoginController::class, 'showRegisterPage'])->name('register.show');
+Route::get('/reset-password', [LoginController::class, 'showResetPasswordPage'])->name('reset-password.show');
+Route::get('/product', [LoginController::class, 'showProductPage'])->name('product.show');

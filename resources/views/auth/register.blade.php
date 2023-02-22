@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <main class="max-w-lg mx-auto mt-10 bg-gray-100 border border-gray-200 p-6 rounded-xl ">
+    <div class="max-w-lg mx-auto mt-10 bg-gray-100 border border-gray-200 p-6 rounded-xl ">
         <h1 class="text-center font-bold text-xl">新規登録</h1>
         <form action="" method="post">
         @csrf
@@ -41,13 +41,13 @@
             </div>
 
             <div class="text-center mt-5">
-                <a href="login" class="bg-blue-400 text-white rounded py-2.5 px-4 hover:bg-blue-500  mr-20">
+                <a href="{{ route('login.show') }}" class="bg-blue-400 text-white rounded py-2.5 px-4 hover:bg-blue-500  mr-20">
                     戻る
                 </a>
                 <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">
-                新規
+                    登録
                 </button>
             </div>
         </form>
-    </main>
+    </div>
 @endsection
