@@ -2,7 +2,7 @@
 @section('content')
     <div class="max-w-lg mx-auto mt-10 bg-gray-100 border border-gray-200 p-6 rounded-xl ">
         <h1 class="text-center font-bold text-xl">新規登録</h1>
-        <form action="" method="post">
+        <form action="{{route('register.store')}}" method="POST">
         @csrf
             <div>
                 <label for="name" class="font-bold">ユーザーネーム</label>
@@ -16,7 +16,7 @@
 
             <div>
                 <label for="password" class="font-bold">パスワード</label>
-                <input type="text" name="password" class="border border-gray-400 p-2 w-full">
+                <input type="password" name="password" class="border border-gray-400 p-2 w-full">
             </div>
 
             <div>
@@ -27,8 +27,9 @@
             <div>
                 <label for="residence" class="font-bold">県地</label>
                 <select name="residence" class="border border-gray-400 p-2 w-full">
-                    <option value="1">神奈川県</option>
-                    <option value="2">茨城県</option>
+                    @foreach ($residences as $residence)
+                    <option value="{{ $residence->id }}">{{ $residence->residence }}</option>
+                    @endforeach
                 </select>
             </div>
 

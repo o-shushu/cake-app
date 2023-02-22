@@ -1,7 +1,8 @@
 <?php
-
+use App\Http\Controllers\Auth\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,10 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/login', [LoginController::class, 'showLoginPage'])->name('login.show');
+
 Route::get('/register', [LoginController::class, 'showRegisterPage'])->name('register.show');
+Route::post('/register', [LoginController::class, 'storeRegister'])->name('register.store');
+
 Route::get('/reset-password', [LoginController::class, 'showResetPasswordPage'])->name('reset-password.show');
-Route::get('/product', [LoginController::class, 'showProductPage'])->name('product.show');
+
+Route::get('/product', [ProductController::class, 'showProductPage'])->name('product.show');

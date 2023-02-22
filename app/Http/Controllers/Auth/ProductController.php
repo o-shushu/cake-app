@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
-class PasswordResetController extends Controller
+class ProductController extends Controller
 {
-    public function create(): View
+        public function showProductPage()
     {
-        return view('auth.reset-password');
+        return view('product');
     }
+
 }
