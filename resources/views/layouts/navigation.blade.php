@@ -3,7 +3,7 @@
     <div class="flex m-5 w-2/3 m-auto justify-between">
         <!-- Logo -->
         <div>
-            <a href="{{ route('home') }}"><img class="m-5" src="{{asset('css/cafe/img/logo.png')}}" alt="menu-logo"></a>
+            <a href="{{ route('home') }}"><img class="m-5" src="{{asset('img/logo.png')}}" alt="menu-logo"></a>
         </div>
 
         <!-- Navigation Links -->

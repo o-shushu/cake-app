@@ -4,9 +4,9 @@
  <!-- 人気店 -->    
             <div class="w-2/3 m-auto">
                 <div class="headerImg relative  h-screen">
-                    <img class="absolute object-cover h-screen w-full" src="{{asset('css/cafe/img/exp1.jpg')}}" alt="exp1">
-                    <img class="absolute object-cover h-screen w-full" src="{{asset('css/cafe/img/exp2.jpg')}}" alt="exp2">
-                    <img class="absolute object-cover h-screen w-full" src="{{asset('css/cafe/img/exp3.jpg')}}" alt="exp3">
+                    <img class="absolute object-cover h-screen w-full" src="{{asset('img/exp1.jpg')}}" alt="exp1">
+                    <img class="absolute object-cover h-screen w-full" src="{{asset('img/exp2.jpg')}}" alt="exp2">
+                    <img class="absolute object-cover h-screen w-full" src="{{asset('img/exp3.jpg')}}" alt="exp3">
                 </div>
             </div>
 
@@ -16,17 +16,17 @@
                 
                 <div class="flex">
                     <div class="">
-                        <img src="{{asset('css/cafe/img/exp1.jpg')}}" alt="ジョブ体験">
+                        <img src="{{asset('img/exp1.jpg')}}" alt="ジョブ体験">
                         <h3>ジョブ体験</h3>
                         <p>カフェカウンターを体験しよう。</p>
                     </div>
                     <div class="">
-                        <img src="{{asset('css/cafe/img/exp2.jpg')}}" alt="レシピ体験">
+                        <img src="{{asset('img/exp2.jpg')}}" alt="レシピ体験">
                         <h3>レシピ体験</h3>
                         <p>美味しいレシピを考えてみよう。</p>
                     </div>
                     <div class="">
-                        <img src="{{asset('css/cafe/img/exp3.jpg')}}" alt="プロモーション体験">
+                        <img src="{{asset('img/exp3.jpg')}}" alt="プロモーション体験">
                         <h3>プロモーション体験</h3>
                         <p>お店の宣伝を手伝ってみよう。</p>
                     </div>
@@ -36,7 +36,7 @@
             <div class="w-2/3 m-auto pt-20">
                 <h2 class="pb-10">商店一覧</h2>
                 <div class="w-1/2 max-w-lg  mt-10 bg-gray-100 border border-gray-200 p-6 rounded-xl ">
-                    <img src="{{asset('css/cafe/img/cafe4.jpg')}}" alt="">
+                    <img src="{{asset('img/cafe4.jpg')}}" alt="">
                     <div class="flex justify-center mt-5">
                         <a href="{{ route('product.show')}}" class="bg-yellow-400 text-white rounded py-2.5 px-4 hover:bg-yellow-500 mr-20">
                         GO
