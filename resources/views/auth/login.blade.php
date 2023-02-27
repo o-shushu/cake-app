@@ -2,16 +2,19 @@
 @section('content')
     <div class="max-w-lg mx-auto mt-10 bg-gray-100 border border-gray-200 p-6 rounded-xl ">
         <h1 class="text-center font-bold text-xl">ログイン</h1>
-        <form action="" method="post">
+        @isset($errors)
+            <p class="text-red-500">{{ $errors->first('message') }}</p>
+        @endisset
+        <form action="{{ route('login.action') }}" method="post">
         @csrf
             <div>
                 <label for="email" class="font-bold">メールアドレス</label>
-                <input type="text" name="email" class="border border-gray-400 p-2 w-full">
+                <input type="text" name="email" value="{{old('email')}}" class="border border-gray-400 p-2 w-full">
             </div>
 
             <div>
                 <label for="password" class="font-bold">パスワード</label>
-                <input type="text" name="password" class="border border-gray-400 p-2 w-full">
+                <input type="password" name="password" class="border border-gray-400 p-2 w-full">
             </div>
 
 

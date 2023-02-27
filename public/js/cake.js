@@ -7,6 +7,16 @@ $(function() {
         .end()
         .appendTo('.headerImg');
     }, 3000);
+
+    var counta = 0;
+    $("#sidebtn").click(function(){
+        counta++;
+        if(counta % 2 !== 0){
+            $(".side-menu").css("display", "block");
+        }else{
+            $(".side-menu").css("display", "none"); 
+        }
+    });
 });
 
 

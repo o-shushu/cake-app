@@ -3,14 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-// use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Residences;
-use App\Http\Requests\LoginRequest;
 
 class LoginController extends Controller
 {
@@ -23,49 +20,72 @@ class LoginController extends Controller
         return view('auth/login');
     }
 
-    public function login(LoginRequest $request)
+    public function actionLogin(Request $request)
     {
-        $credentials = $request->getCredentials();
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string|min:8',
+        ]);
+       
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-        if(!Auth::validate($credentials)):
-            return redirect()->to('login')
-                ->withErrors(trans('auth.failed'));
-        endif;
+            return redirect()->to('/');
+        }
 
-        $user = Auth::getProvider()->retrieveByCredentials($credentials);
-
-        Auth::login($user);
-
-        return $this->authenticated($request, $user);
+        return back()->withErrors([
+            'message' => 'メールアドレス又はパスワードが正しくありません。',
+        ])->onlyInput('email');
+    
     }
 
 
+
 // RegisterPage
-    public function showRegisterPage(Request $request)
+    public function showRegisterPage()
     {
         $residences = Residences::all();
         return view('auth/register', compact('residences'));
     }
 
-    public function storeRegister()
+    public function storeRegister(Request $request)
     {
-        $this->validate(request(), [
+        $request->validate([
             'name' => 'required',
             'email' => 'required|email|string',
-            'password' => 'required',
+            'password' => 'required|confirmed|string|min:8',
             'tel' => 'required|numeric|digits_between:10,11',
             'residence' => 'required',
             'type' => 'required'
         ]);
         
-        $user = User::create(request(['name', 'email', 'password', 'tel', 'residence', 'type']));
+        $user = User::create([
+            'name' => $request->name, 
+            'email' => $request->email, 
+            'password' => $request->password,
+            'tel' => $request->tel, 
+            'residence' => $request->residence, 
+            'type' => $request->type,
+        ]);
         
-        auth()->login($user);
         
-        // return redirect()->to('/games');
-        return redirect('/register')->with('success', "Account successfully registered.");
-    }
+        $messageRegister= '新規登録完了しました。ログインしてください。';
 
+        // return redirect()->to('/games');
+        $residences = Residences::all();
+        return view('auth/register', compact('residences', 'messageRegister'));
+    }
+//Logout
+    public function actionLogout(Request $request)
+    {
+        Auth::logout();
+ 
+        $request->session()->invalidate();
+     
+        $request->session()->regenerateToken();
+     
+        return redirect()->to('/');
+    }
 // ResetPasswordPage
     public function showResetPasswordPage()
     {
