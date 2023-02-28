@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Residences;
+use App\Http\Middleware\RoleCheck;
 
 class LoginController extends Controller
 {
@@ -26,10 +27,9 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:8',
         ]);
-       
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
             return redirect()->to('/');
         }
 

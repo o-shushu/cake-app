@@ -16,8 +16,12 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
-            <!-- Page Content -->
+            @if(auth()->check())
+                @include('layouts.guest')
+            @else
+                @include('layouts.navigation')
+            @endif
+        <!-- Page Content -->
             <main>
             @yield('content') 
             </main>

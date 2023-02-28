@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
+})->name('home')->middleware('role.check');
 
 Route::group(['middleware' => ['guest']], function() {
     Route::get('/login', [LoginController::class, 'showLoginPage'])->name('login.show');
@@ -26,10 +26,14 @@ Route::group(['middleware' => ['guest']], function() {
     Route::get('/register', [LoginController::class, 'showRegisterPage'])->name('register.show');
     Route::post('/register', [LoginController::class, 'storeRegister'])->name('register.store');
 
+    
     Route::get('/reset-password', [LoginController::class, 'showResetPasswordPage'])->name('reset-password.show');
 });
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/logout', [LoginController::class, 'actionLogout'])->name('logout.action');
 });
 
-Route::get('/product', [ProductController::class, 'showProductPage'])->name('product.show');
+Route::resource('upload',ProductController::class);
+
+    Route::get('/product', [ProductController::class, 'showProductPage'])->name('product.show');
+    

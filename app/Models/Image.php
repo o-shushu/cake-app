@@ -7,5 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-    use HasFactory;
+  public $timestamps = false;
+    protected $fillable = [
+        'cake_id',
+        'shop_id',
+        'image_name',
+        'image_type',
+        'tmp_name',
+        'image_size',
+      ];
 }
