@@ -157,4 +157,5 @@ class ResidencesSeeder extends Seeder
             'residence' =>'沖縄県'
         ]);
     }
+    
 }

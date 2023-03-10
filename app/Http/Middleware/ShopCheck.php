@@ -4,8 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\Shop;
 
-class RoleCheck
+
+class ShopCheck
 {
     /**
      * Handle an incoming request.
@@ -16,19 +18,11 @@ class RoleCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        // 0はシステム管理者、１は会員ユーザー、２は営業ユーザー
-        if(auth()->check() && auth()->user()->type == '0'){
-
-            return redirect()->to('/');
-        }
-        if(auth()->check() && auth()->user()->type == '1'){
-
+        $model = new Shop();
+        $shopId = $model->checkShopId();
+        if($shopId == true){
             return $next($request);
         }
-        if(auth()->check() && auth()->user()->type == '2'){
-
-            return redirect()->to('/product');
-        }
-        return $next($request);
+        return redirect('/product')->with('alert', '店舗情報を入力してください。');
     }
 }

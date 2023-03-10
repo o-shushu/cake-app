@@ -17,13 +17,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('cake_id')->comment('ケーキID');
             $table->unsignedBigInteger('shop_id')->comment('店舗ID');
-            $table->string('image_name', 255)->comment('画像ネーム');
-            $table->string('image_type', 255)->comment('画像型');
+            $table->string('image_name', 32)->comment('画像ネーム');
+            $table->string('image_type', 32)->nullable()->comment('画像型');
             $table->string('tmp_name', 255)->comment('画像のパス');
-            $table->string('image_size', 255)->comment('画像サイズ');
-
-            $table->foreign('shop_id')->references('id')->on('shops');
-            $table->foreign('cake_id')->references('id')->on('cakes');
+            $table->string('image_size', 32)->nullable()->comment('画像サイズ');
         });
     }
 

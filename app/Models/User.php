@@ -18,5 +18,19 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($password);
     }
-   
+
+    // public function residences(){
+    //     return $this->belongsToMany('App\Models\Residences');
+    //     // return $this->hasMany('App\Models\Residences', 'residence', 'id');
+    // }
+
+    // public function index(){
+    //     $data = $this->get();
+        
+    //     foreach($data as $val){
+    //         foreach($val->residences as $value){
+    //             echo $value ->residence;
+    //         }
+    //     }
+    // }
 }

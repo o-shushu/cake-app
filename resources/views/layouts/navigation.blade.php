@@ -2,7 +2,7 @@
 <div class="bg-yellow-300">
     <div class="flex m-5 w-2/3 m-auto justify-between">
         <!-- Logo -->
-        <div>
+        <div class="w-1/3">
             <a href="{{ route('home') }}"><img class="m-5" src="{{asset('img/logo.png')}}" alt="menu-logo"></a>
         </div>
 

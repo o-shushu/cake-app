@@ -35,22 +35,31 @@
 <!-- 商店一覧 -->
             <div class="w-2/3 m-auto pt-20">
                 <h2 class="pb-10">商店一覧</h2>
-                <div class="w-1/2 max-w-lg  mt-10 bg-gray-100 border border-gray-200 p-6 rounded-xl ">
-                    <img src="{{asset('img/cafe4.jpg')}}" alt="">
-                    <div class="flex justify-center mt-5">
-                        <a href="{{ route('product.show')}}" class="bg-yellow-400 text-white rounded py-2.5 px-4 hover:bg-yellow-500 mr-20">
-                        GO
-                        </a>
-                        <button type="submit" class="bg-yellow-400 text-white rounded py-2 px-4 hover:bg-yellow-500">
-                        いいね
-                            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="-mt-px mr-1 w-5 h-5 stroke-red-400 dark:stroke-red-600 group-hover:stroke-red-600 dark:group-hover:stroke-red-400">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                            </svg>
-                        </button>
+                <div class="flex  flex-wrap justify-between">
+                    @if(isset($shopImages))   
+                    @foreach ($shopImages as $shopImage)
+                    <div class="w-1/2 max-w-lg  mt-10 bg-gray-100 border border-gray-200 p-6 rounded-xl ">
+                        <img src="{{ asset($shopImage->tmp_name) }}" alt="">
+                        <div class="flex justify-center mt-5">
+                            <a href="{{ route('home.Product', $shopImage->shop_id) }}" class="bg-yellow-400 text-white rounded py-2.5 px-4 hover:bg-yellow-500 mr-20">
+                            GO
+                            </a>
+                            <button type="submit" class="bg-yellow-400 text-white rounded py-2 px-4 hover:bg-yellow-500">
+                            いいね
+                                <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="-mt-px mr-1 w-5 h-5 stroke-red-400 dark:stroke-red-600 group-hover:stroke-red-600 dark:group-hover:stroke-red-400">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
+                    @endforeach
+                    @endif
                 </div>
             </div>
+        <div >
+        <div class="justify-center">{{ $shopImages->onEachSide(2)->links() }}</div>
 
+        </div>
 
     </content>
     
