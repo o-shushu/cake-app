@@ -24,47 +24,39 @@
                                 </div>
 
                                 <div class="text-center mx-10"> 
-                                    <label for="">価格</label>
-                                    <p>{{ $product->cake_price}}</p>
+                                    <label for="">カテゴリー</label>
+                                    <p>{{ $product->cake_category}}</p>
                                 </div>
 
                                 <div class="text-center mx-10"> 
-                                    <label for="">サイズ</label>
-                                    <p>{{ $product->cake_size}}</p>
+                                    <label for="">価格</label>
+                                    <p id="price">price</p>
                                 </div>
-                            </div>
+                                <div>
+                                    <label for="">サイズ</label>
+                                    <select id="size" class="border border-gray-400 p-2 w-full">
+                                    @foreach($product->cakecontent as $value)
+                                        <option value="{{ $value->cake_price }}">{{ $value->cake_size }}</option>
+                                    @endforeach
+                                    </select>
+                                </div>
+                            </div> 
                         @endforeach
                     </div>
                 </div>
-                    @if(isset(auth()->user()->type) && auth()->user()->type == 2)
-                        <div class="text-center mt-5">
-                            <a href="{{ route('product.show') }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
-                                戻る
-                            </a>
-                            <a href="{{ route('update.index', $product->id) }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
-                                編集
-                            </a>
-                        </div>
-                        <form onsubmit="return deleteTask();" action="delete/{{ $product->id }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500" type="submit">削除</button>
-                        </form>
-                    @else
-                        <div class="text-center mt-5">
-                        <a href="{{ url()->previous() }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
-                                戻る
-                                </a>
-                                <a href="{{ route('Order') }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
-                                    注文
-                                </a>
-                                <a href="{{ route('update.index', $product->id) }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
-                                    予約
-                                </a>
-                            </div>
-                    @endif
-
-
+                <div class="text-center mt-5">
+                    <a href="{{ route('product.show') }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
+                        戻る
+                    </a>
+                    <a href="{{ route('update.index', ['cake' => $product->id]) }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
+                        編集
+                    </a>
+                </div>
+                <form onsubmit="return deleteTask();" action="delete/{{ $product->id }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500" type="submit">削除</button>
+                </form>
     </content>
     
     <footer class="bg-yellow-300 ">
@@ -78,5 +70,7 @@
             return false;
         }
     }
+
+
 </script>
 @endsection

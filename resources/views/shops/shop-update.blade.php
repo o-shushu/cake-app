@@ -11,6 +11,7 @@
                 <form method="POST" action="{{ route('shop.Confirm') }}" enctype="multipart/form-data" class="text-center">
                     @csrf
                     <input class="m-6" type="file" name="image">
+                    <input class="m-6" type="hidden" name="shopId" value="{{$shopId}}">
                     <button class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 mr-20">アップロード</button>
                 </form>
 
@@ -44,13 +45,14 @@
                             {{ $item->remark }}
                             </textarea>
                         </div>
-                    @endforeach
-                    <div class="text-center mt-5">
-                    <a href="{{ route('shop.detail') }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
-                    戻る
-                    </a>
-                    <button class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500" type="submit">送る</button>
-                    </div>
+                        <input class="m-6" type="hidden" name="shopId" value="{{$shopId}}">
+                        @endforeach
+                        <div class="text-center mt-5">
+                            <a href="{{ route('shop.detail',$item->user_id) }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
+                                戻る
+                            </a>
+                            <button class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500" type="submit">送る</button>
+                        </div>
                 </form>
             </div>
 

@@ -11,10 +11,20 @@
         @if (auth()->user()->type === '0')
             <div >
                 <ul class="flex m-5">
-                    <li class="ml-5"><a href="#">ユーザー一覧</a></li>
-                    <li class="ml-5"><a href="#">Likes</a></li>
-                    <li class="ml-5"><a href="#">おすすめ </a></li>
-                    <li class="ml-5"><a href="#">人気店 </a></li>
+                    <div class="relative inline-block px-4 group">ユーザー一覧
+                        <div class="absolute bg-gray-100 ring-2 z-10 hidden group-hover:block">
+                            <a class="block px-4 py-3 hover:bg-gray-300" href="{{route('consumers.Index')}}">会員ユーザー</a>
+                            <a class="block px-4 py-3 hover:bg-gray-300" href="{{route('shopkeepers.Index')}}">営業ユーザー</a>
+                        </div>
+                    </div>
+                    <div class="relative inline-block px-4 group">いいね一覧
+                        <div class="absolute bg-gray-100 ring-2 z-10 hidden group-hover:block">
+                            <a class="block px-4 py-3 hover:bg-gray-300" href="{{route('shopLikes.index')}}">店舗いいね</a>
+                            <a class="block px-4 py-3 hover:bg-gray-300" href="{{route('cakeLikes.index')}}">商品いいね</a>
+                        </div>
+                    </div>
+                    <li class="ml-5"><a href="/cake-app/public/#products">おすすめ </a></li>
+                    <li class="ml-5"><a href="/cake-app/public/#shops">店一覧</a></li>
 
                     <div class="relative inline-block px-4 group">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-yellow hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -39,9 +49,8 @@
        @if (auth()->user()->type === '1')
             <div >
                 <ul class="flex m-5">
-                    <li class="ml-5"><a href="#">店一覧</a></li>
-                    <li class="ml-5"><a href="#">カート</a></li>
-
+                    <li class="ml-5"><a href="/cake-app/public/#shops">店一覧</a></li>
+                    <li><a href="{{ route('indexCart') }}"><i class="fa-solid fa-cart-plus"></i></a></li>
                     <div class="relative inline-block px-4 group">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-yellow hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ auth()->user()->name }}</div>
@@ -54,9 +63,8 @@
                         </button>
                         <div class="absolute w-24 bg-gray-100 ring-2 z-10 hidden group-hover:block">
                             <a class="block px-4 py-3 hover:bg-gray-300" href="{{ route('user.detail') }}">ユーザー情報</a>
-                            <a class="block px-4 py-3 hover:bg-gray-300" href="#">購入記録</a>
+                            <a class="block px-4 py-3 hover:bg-gray-300" href="{{ route('buyCode.Index') }}">購入記録</a>
                             <a class="block px-4 py-3 hover:bg-gray-300" href="{{ route('logout.action') }}">ログアウト</a>
-                            <a class="block px-4 py-3 hover:bg-gray-300" href="#">おすすめ</a>
                         </div>
                     </div>
                 </ul>

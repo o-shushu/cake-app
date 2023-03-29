@@ -1,5 +1,5 @@
-<!-- Primary Navigation Menu -->
-<div class="bg-yellow-300">
+<!-- Primary Navigation Menu fixed z-10-->
+<div class="bg-yellow-300 w-full">
     <div class="flex m-5 w-2/3 m-auto justify-between">
         <!-- Logo -->
         <div class="w-1/3">
@@ -7,11 +7,11 @@
         </div>
 
         <!-- Navigation Links -->
-        <div >
+        <div>
             <ul class="flex m-5">
             @if (url()->current() === route('home'))
-                <li class="ml-5"><a href="#">おすすめ</a></li>
-                <li class="ml-5"><a href="#">人気店</a></li>
+                <li class="ml-5"><a href="#products">おすすめ</a></li>
+                <li class="ml-5"><a href="#shops">商店一覧</a></li>
                 @auth
                 <div class="relative inline-block px-4 group">
                     <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-yellow hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">

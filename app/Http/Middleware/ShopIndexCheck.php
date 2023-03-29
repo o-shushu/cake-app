@@ -20,7 +20,7 @@ class ShopIndexCheck
         $model = new Shop();
         $shopId = $model->checkShopId();
         if($shopId == true){
-           return redirect('shop/detail');
+           return redirect('shop/detail/'.auth()->user()->id);
         }
         return $next($request);
     }

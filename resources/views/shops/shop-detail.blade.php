@@ -22,16 +22,16 @@
                     概要
                     <p>{{ $item->remark }}</p>
                 </div>
+        </div>
+            <div class="mt-5 flex gap-2">
+                <a href="{{ route('product.show') }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
+                    戻る
+                </a>
+                <a href="{{ route('shop.Update',$item->id) }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
+                    変更
+                </a>
+            </div>
             @endforeach
-        </div>
-        <div class="mt-5 flex gap-2">
-        <a href="{{ route('product.show') }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
-        戻る
-        </a>
-        <a href="{{ route('shop.Update') }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
-        変更
-        </a>
-        </div>
     </div>
 
 </content>

@@ -19,7 +19,7 @@ class RoleCheck
         // 0はシステム管理者、１は会員ユーザー、２は営業ユーザー
         if(auth()->check() && auth()->user()->type == '0'){
 
-            return redirect()->to('/');
+            return $next($request);
         }
         if(auth()->check() && auth()->user()->type == '1'){
 

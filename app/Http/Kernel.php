@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'shop.check' =>\App\Http\Middleware\ShopCheck::class,
         'ShopIndex.check' =>\App\Http\Middleware\ShopIndexCheck::class,
         'order.check' =>\App\Http\Middleware\OrderCheck::class,
+        'user.check' =>\App\Http\Middleware\UserCheck::class,
         
     ];
 }

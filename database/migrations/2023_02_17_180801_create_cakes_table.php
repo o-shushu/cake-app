@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('shop_id')->comment('店舗ID');
             $table->string('cake_name', 32)->comment('ケーキネーム');
+            $table->string('cake_category', 32)->comment('カテゴリー');
             $table->string('cake_content', 512)->comment('ケーキ詳細');
             $table->timestamps();
         });

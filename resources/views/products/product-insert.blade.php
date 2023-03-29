@@ -4,7 +4,9 @@
 <!-- 商品新規 -->
 
             <div class="w-2/3 m-auto pt-20">
-                <h2 class="pb-10">商品新規</h2>
+                <h2 class="pb-10">商品新規</h2> 
+
+                <p>*画像必要です。</p>
                 @if(isset($image_path))
                     <img class="w-1/2 mx-auto" src="{{asset($image_path)}}">
                 @endif
@@ -33,6 +35,14 @@
                             <label for="">ネーム</label>
                             <input type="text" name="cake_name">
                             @error('cake_name')
+                                {{$message}}
+                            @enderror
+                        </div>
+
+                        <div class="p-6 text-center"> 
+                            <label for="">カテゴリー</label>
+                            <input type="text" name="cake_category">
+                            @error('cake_category')
                                 {{$message}}
                             @enderror
                         </div>

@@ -8,6 +8,7 @@ use App\Models\Cake;
 
 class Cakecontent extends Model
 {
+    protected $table = 'cakecontent';
     protected $fillable = [
         'cake_price',
         'cake_size' ,
