@@ -1,60 +1,166 @@
 @extends('layouts.app')
 @section('content')
-   <content>
+<content class="">
  <!-- 人気店 -->    
-            <div class="w-2/3 m-auto">
-                <div class="headerImg relative  h-screen">
-                    <img class="absolute object-cover h-screen w-full" src="{{asset('img/exp1.jpg')}}" alt="exp1">
-                    <img class="absolute object-cover h-screen w-full" src="{{asset('img/exp2.jpg')}}" alt="exp2">
-                    <img class="absolute object-cover h-screen w-full" src="{{asset('img/exp3.jpg')}}" alt="exp3">
+   <div class="w-2/3 m-auto">
+        <div class="text-center mb-3">
+            <span class="font-bold border-t-2 border-yellow-400 text-2xl">人気店</span>
+        </div>
+        <div id="banner" class="relative w-full mx-auto mt-10 p-2 bg-white shadow-2xl border-2">
+            <ul id="slider-wrapper" class="relative w-full h-[50vh] md:h-[60vh] flex overflow-hidden">
+                @if(isset($chunkShopLike))
+                @foreach($chunkShopLike[0] as $item)
+                <li>
+                    <a href="{{ route('home.Product', $item->shop->id) }}">
+                    <img class="absolute w-full h-full object-cover transition-transform duration-1000" src="{{asset($item->shop->images->first()->tmp_name)}}" alt="exp1">
+                    </a>
+                </li>
+                @endforeach
+                @endif
+                <div class="absolute px-4 top-[50%] flex justify-between w-full">
+                    <div class="px-2 py-1 rounded-full bg-white/70 hover:bg-white" id="prev"><i class="fas fa-backward"></i></div>
+                    <div class="px-2 py-1 rounded-full bg-white/70 hover:bg-white" id="next"><i class="fas fa-forward"></i></div>
                 </div>
+            </ul>            
+        </div>
+    </div> 
+<!-- 人気商品のおすすめ -->               
+    <div id="products" class="w-2/3 m-auto pt-20">
+        <div class="text-center mb-3">
+            <span class="font-bold border-t-2 border-yellow-400 text-2xl">おすすめ商品</span>
+        </div>
+        <button id="moreLook" class="bg-yellow-400 rounded h-8 mb-3">もっと見る</button>
+        <div class="block sm:flex relative">
+            @if(isset($chunkCakeLike))
+            @foreach($chunkCakeLike[0] as $item)
+                <div class="border h-60 m-auto">
+                    <a href="{{ route('home.ProductDetail', $item->cake->id) }}">
+                        <img class="h-3/4 w-60 mx-auto rounded" src="{{ asset($item->cake->images->first()->tmp_name) }}">
+                    </a>
+                    <h3 class="text-center">{{$item->cake->cake_name}}</h3>
+                    @auth
+                        @if($likeCake_model->like_exist(Auth::user()->id,$item->cake->id))
+                            <div class="m-auto">
+                                <a class="cake-like-toggle text-red-500 cursor-pointer" data-cake-id="{{$item->cake->id}}"><i class="fas fa-heart"></i></a>
+                                <span class="likesCount">{{$item->total}}</span>
+                            </div>
+                        @else
+                            <div class="m-auto">
+                                <a class="cake-like-toggle cursor-pointer" data-cake-id="{{$item->cake->id}}"><i class="fas fa-heart"></i></a>
+                                <span class="likesCount">{{$item->total}}</span>
+                            </div>
+                        @endif 
+                    @endauth
+                    @guest
+                        <div class="m-auto">
+                            <i class="fas fa-heart"></i>
+                            <span class="likesCount">{{$item->total}}</span>
+                        </div>
+                    @endguest
+                </div>
+            @endforeach
+            @endif
+        </div>
+<!-- もっと見る -->
+        <div class="lookMoreProducts fixed z-10 bg-gray-200 w-2/3 h-screen top-0 overflow-scroll hidden">
+            <div class="text-center mb-3">
+                <span class="font-bold border-t-2 border-yellow-400 text-2xl">おすすめ商品</span>
             </div>
+            <div class="float-right">
+                <div class="grid-cols-1 md:gap-x-20 sm:grid-cols-2 grid justify-between lg:gap-x-40">
+                    @if(isset($cakesLike)) 
+                    @foreach ($cakesLike as $item)                 
+                        <div class="h-4/5 mt-5 bg-gray-100 border border-gray-200 p-2 rounded-xl text-center">
+                            <div class="h-4/5">
+                            <a class="h-3/4 w-3/4 mx-0" href="{{ route('home.ProductDetail', $item->cake->id) }}">
+                                <img class="h-3/4 w-full mx-auto rounded" src="{{ asset($item->cake->images->first()->tmp_name) }}">
+                            </a>
+                            <div class="mt-4">{{$item->cake->cake_name}}</div>
+                        </div>
+                        <div class="flex justify-around w-full h-1/5 bg-yellow-400 rounded hover:bg-yellow-500">
+                            @auth
+                                @if($likeCake_model->like_exist(Auth::user()->id,$item->cake->id))
+                                <div class="m-auto">
+                                    <a class="cake-like-toggle text-red-500 cursor-pointer" data-cake-id="{{$item->cake->id}}"><i id="click{{$item->cake->id}}" class="fas fa-heart"></i></a>
+                                    <span class="likesCount">{{$item->total}}</span>
+                                </div>
+                                @else
+                                <div class="m-auto">
+                                    <a class="cake-like-toggle cursor-pointer" data-cake-id="{{$item->cake->id}}"><i id="click{{$item->cake->id}}" class="fas fa-heart"></i></a>
+                                    <span class="likesCount">{{$item->total}}</span>
+                                </div>
+                                @endif 
+                            @endauth
+                            @guest
+                                <div class="m-auto">
+                                    <i class="fas fa-heart"></i>
+                                    <span class="likesCount">{{$item->total}}</span>
+                                </div>
+                            @endguest
+                            @if(isset(auth()->user()->type) && auth()->user()->type === '0')
 
-            <div class="w-2/3 m-auto pt-20">
- <!-- 人気商品のおすすめ -->               
-                <h2 class="pb-10">おすすめ</h2>
-                
-                <div class="flex">
-                    <div class="">
-                        <img src="{{asset('img/exp1.jpg')}}" alt="ジョブ体験">
-                        <h3>ジョブ体験</h3>
-                        <p>カフェカウンターを体験しよう。</p>
+                            @else
+                            <div class="m-auto">
+                                <a data-cake-id="{{$item->cake->id}}" data-shop-id="{{$item->cake->shop->id}}" class="shopsInputCart cursor-pointer">
+                                カートに入れる
+                                </a>
+                            </div>
+
+                            @endif
+                        </div>
                     </div>
-                    <div class="">
-                        <img src="{{asset('img/exp2.jpg')}}" alt="レシピ体験">
-                        <h3>レシピ体験</h3>
-                        <p>美味しいレシピを考えてみよう。</p>
-                    </div>
-                    <div class="">
-                        <img src="{{asset('img/exp3.jpg')}}" alt="プロモーション体験">
-                        <h3>プロモーション体験</h3>
-                        <p>お店の宣伝を手伝ってみよう。</p>
-                    </div>
+                    @endforeach
+                    @endif
                 </div>
             </div>
+        </div>
+    </div>
 <!-- 商店一覧 -->
-            <div class="w-2/3 m-auto pt-20">
-                <h2 class="pb-10">商店一覧</h2>
-                <div class="w-1/2 max-w-lg  mt-10 bg-gray-100 border border-gray-200 p-6 rounded-xl ">
-                    <img src="{{asset('img/cafe4.jpg')}}" alt="">
-                    <div class="flex justify-center mt-5">
-                        <a href="{{ route('product.show')}}" class="bg-yellow-400 text-white rounded py-2.5 px-4 hover:bg-yellow-500 mr-20">
-                        GO
-                        </a>
-                        <button type="submit" class="bg-yellow-400 text-white rounded py-2 px-4 hover:bg-yellow-500">
-                        いいね
-                            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="-mt-px mr-1 w-5 h-5 stroke-red-400 dark:stroke-red-600 group-hover:stroke-red-600 dark:group-hover:stroke-red-400">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                            </svg>
-                        </button>
-                    </div>
+    <div id="shops" class="w-2/3 m-auto pt-20">
+        <div class="text-center mb-3">
+            <span class="font-bold border-t-2 border-yellow-400 text-2xl">店舗一覧</span>
+        </div>      
+        <div class="grid-cols-1 gap-x-5 sm:gap-x-10 md:gap-x-20 sm:grid-cols-2 grid justify-between lg:gap-x-40">
+            @if(isset($shops)) 
+            @foreach ($shops as $shop)
+            @php
+                $shopImages = $shop->images()->shopImages()->get();
+            @endphp
+            <div class="h-4/5 mt-5 bg-gray-100 border border-gray-200 p-2 rounded-xl text-center shadow-lg">
+                @foreach($shopImages as $shopImage)
+                <a href="{{ route('home.Product', $shopImage->shop_id) }}">
+                    <img class="h-3/4 w-full mx-auto rounded" src="{{ asset($shopImage->tmp_name) }}" alt="">
+                </a>
+                @endforeach
+                <div class="flex justify-around mt-2">
+                    <p class="">{{$shop->shop_name}}</p>                           
+                    @auth
+                        @if($likeShop_model->like_exist(Auth::user()->id,$shop->id))
+                        <div>
+                            <a id="js-like-toggle" class="js-like-toggle text-red-500 cursor-pointer" data-shop-id="{{$shop->id}}"><i class="fas fa-heart"></i></a>
+                            <span class="likesCount">{{$shop->likes_count}}</span>
+                        </div>
+                        @else
+                        <div>
+                            <a class="js-like-toggle cursor-pointer" data-shop-id="{{$shop->id}}"><i class="fas fa-heart"></i></a>
+                            <span class="likesCount">{{$shop->likes_count}}</span>
+                        </div>
+                        @endif 
+                    @endauth
+                    @guest
+                        <div>
+                            <i class="fas fa-heart"></i>
+                            <span class="likesCount">{{$shop->likes_count}}</span>
+                        </div>
+                    @endguest
                 </div>
             </div>
-
-
-    </content>
-    
-    <footer class="bg-yellow-300 ">
-
-    </footer>
+            @endforeach
+            @endif  
+        </div>
+        <div class="mb-3">
+            <div class="justify-center">{{ $shops->links() }}</div>
+        </div>
+    </div>
+</content>
 @endsection

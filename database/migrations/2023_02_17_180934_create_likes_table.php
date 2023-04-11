@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('likes', function (Blueprint $table) {
             $table->id();    
             $table->unsignedBigInteger('user_id')->comment('ユーザーID');
-            $table->unsignedBigInteger('cake_id')->comment('ケーキID');
-            $table->unsignedBigInteger('shop_id')->comment('店舗ID');
+            $table->unsignedBigInteger('cake_id')->nullable()->comment('ケーキID');
+            $table->unsignedBigInteger('shop_id')->nullable()->comment('店舗ID');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('shop_id')->references('id')->on('shops');
-            $table->foreign('cake_id')->references('id')->on('cakes');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
+            $table->foreign('cake_id')->references('id')->on('cakes')->onDelete('cascade');
         });
     }
 

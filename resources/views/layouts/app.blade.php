@@ -10,18 +10,29 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js' ,'resources/js/carousel.js'])
+    
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
-            <!-- Page Content -->
-            <main>
-            @yield('content') 
+    <body class="h-full">
+        <header class="fixed w-screen z-10">
+            @if(auth()->check())
+                @include('layouts.guest-navigation')
+            @else
+                @include('layouts.navigation')
+            @endif
+        <!-- Page Content -->
+        </header>
+        <div class="min-h-screen pt-28">
+            <main class="relative">
+                @yield('content') 
             </main>
         </div>
+        <footer class="flex items-center bg-yellow-300 h-10 w-full relative bottom-0 mt-1/5">
+            <div class="w-full text-center">
+            <i class="bi bi-0-square"></i>
+                <p >© 2022 サイトDeli Cake</p>
+            </div>
+        </footer>  
     </body>
 </html>
 

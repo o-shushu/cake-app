@@ -1,17 +1,17 @@
-<!-- Primary Navigation Menu -->
+<!-- Primary Navigation Menu fixed z-10-->
 <div class="bg-yellow-300">
-    <div class="flex m-5 w-2/3 m-auto justify-between">
+    <div class="flex m-5 w-full m-auto justify-between sm:w-2/3">
         <!-- Logo -->
-        <div>
-            <a href="{{ route('home') }}"><img class="m-5" src="{{asset('img/logo.png')}}" alt="menu-logo"></a>
+        <div class="w-1/3 my-auto mx-0">
+            <a href="{{ route('home') }}"><img class="w-full" src="{{asset('img/logo.png')}}" alt="menu-logo"></a>
         </div>
 
         <!-- Navigation Links -->
-        <div >
-            <ul class="flex m-5">
+        <div class="my-auto">
+            <ul class="flex my-6 mx-auto">
             @if (url()->current() === route('home'))
-                <li class="ml-5"><a href="#">おすすめ</a></li>
-                <li class="ml-5"><a href="#">人気店</a></li>
+                <li class="text-sm sm:text-base m-auto pr-3"><a href="#products">おすすめ</a></li>
+                <li class="text-sm sm:text-base m-auto pr-3"><a href="#shops">店舗一覧</a></li>
                 @auth
                 <div class="relative inline-block px-4 group">
                     <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-yellow hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -25,22 +25,21 @@
                     </button>
                     <div class="absolute w-24 bg-gray-100 ring-2 z-10 hidden group-hover:block">
                         <a class="block px-4 py-3 hover:bg-gray-300" href="{{ route('logout.action') }}">ログアウト</a>
-                        <a class="block px-4 py-3 hover:bg-gray-300" href="#">おすすめ</a>
-                        <a class="block px-4 py-3 hover:bg-gray-300" href="#">おすすめ</a>
-                        <a class="block px-4 py-3 hover:bg-gray-300" href="#">おすすめ</a>
                     </div>
                 </div>
                 @endauth
                 @guest
 
-                <li class="ml-5"><a href="{{ route('login.show') }}">ログイン</a></li>
+                <li id="login" class="text-sm sm:text-base m-auto pr-3"><a href="{{ route('login.show') }}">ログイン</a></li>
                 @endguest
             @else
-                <li><a href="{{ route('home') }}">Homepage</a></li>
+                @if (url()->current() === route('login.show'))
+                <a href="{{ route('home') }}">ホームページ</a>
+                @else
+                <li id="login" class="text-sm sm:text-base m-auto pr-3"><a href="{{ route('login.show') }}">ログイン</a></li>
+                @endif
             @endif
             </ul>
         </div>
-
-        <!-- Settings Dropdown -->
     </div>
 </div>
