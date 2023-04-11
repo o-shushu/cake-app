@@ -21,7 +21,8 @@ return new class extends Migration
             $table->decimal('total_price')->nullable()->comment('合計金額');
             $table->string('payment_method', 255)->comment('支払方法');
             $table->string('delivery_place', 255)->comment('配達地');
-            $table->string('content')->nullable()->comment('注文内容');
+            $table->string('content')->nullable()->comment('注文内容');   
+            $table->string('flag')->nullable()->comment('理論操作');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

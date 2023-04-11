@@ -30,8 +30,8 @@ class LikeSeeder extends Seeder
                         'updated_at' => Carbon::now(),
                     ],
                     [
-                        'user_id' => rand(1,16),
-                        'cake_id' => rand(1,51),
+                        'user_id' => rand(17,31),
+                        'cake_id' => rand(1,50),
                         'shop_id' => null,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now(),

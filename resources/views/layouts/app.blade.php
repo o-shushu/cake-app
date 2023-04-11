@@ -10,89 +10,29 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-        
-        <style>
-        *{
-            margin: 0;
-            padding: 0;
-            text-decoration: none;
-            list-style: none;
-        }
-        #banner{
-            width: 800px;
-            height: 400px;
-            border: 2px solid black;
-            overflow: hidden;
-            position: relative;
-        }
-        #design{
-            width: 3200px;
-            height: 400px;
-        } 
-        #design img{
-            width: 800px;
-            height: 400px;
-        }  
-		#design li{
-            float:left;
-        }
-        .prev{
-            width: 80px;
-            height: 60px;
-            color: white;
-            text-align: center;
-            font-size: 40px;
-            position: absolute;
-            left:10px;
-            top:140px;
-            cursor:pointer;
-        }
-        .next{
-            width: 80px;
-            height: 60px;
-            color: white;
-            text-align: center;
-            font-size: 40px;
-            position: absolute;
-            right:10px;
-            top:140px;
-            cursor:pointer;
-        }
-        #icoList{
-            position: absolute;
-            right: 10px;
-            bottom: 10px;
-        }
-        #icoList li{
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: gray;
-            text-align: center;
-            line-height: 50px;
-            color: white;
-            float: left;
-            margin-left: 5px;
-            cursor: pointer;
-
-        }
-
-	    </style>
-        
+        @vite(['resources/css/app.css', 'resources/js/app.js' ,'resources/js/carousel.js'])
+    
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body class="h-full">
+        <header class="fixed w-screen z-10">
             @if(auth()->check())
                 @include('layouts.guest-navigation')
             @else
                 @include('layouts.navigation')
             @endif
         <!-- Page Content -->
-            <main>
-            @yield('content') 
+        </header>
+        <div class="min-h-screen pt-28">
+            <main class="relative">
+                @yield('content') 
             </main>
         </div>
+        <footer class="flex items-center bg-yellow-300 h-10 w-full relative bottom-0 mt-1/5">
+            <div class="w-full text-center">
+            <i class="bi bi-0-square"></i>
+                <p >© 2022 サイトDeli Cake</p>
+            </div>
+        </footer>  
     </body>
 </html>
 

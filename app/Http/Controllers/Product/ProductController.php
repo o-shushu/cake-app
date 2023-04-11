@@ -26,9 +26,9 @@ class ProductController extends Controller
             $shopId = $shop->id;
 
             $cakes = Cake::withCount('likes')->where('shop_id',$shopId)->orderBy('created_at', 'desc')->paginate(4);
-            $like_model = new Cake;
+            $likeCake_model = new Cake;
 
-            return view('products/product', compact('cakes','shopId', 'like_model'));
+            return view('products/product', compact('cakes','shopId', 'likeCake_model'));
         }
         //店舗を登録しない方
         $message = "店舗情報を登録してください。";
@@ -40,8 +40,8 @@ class ProductController extends Controller
     public function showShopProductPage($shopId)
     {
         $cakes = Cake::withCount('likes')->where('shop_id',$shopId)->orderBy('created_at', 'desc')->paginate(4);
-        $like_model = new Cake;
-        return view('products/product', compact('cakes', 'like_model','shopId'));
+        $likeCake_model = new Cake;
+        return view('products/product', compact('cakes', 'likeCake_model','shopId'));
     }
 
     //店舗内商品の詳細を表示
@@ -105,7 +105,7 @@ class ProductController extends Controller
             'cakecontent.*.cake_price' => 'required|numeric',
             'cakecontent.*.cake_size' => 'required',
         ]);
-
+        
         DB::beginTransaction();
         try{
             $shop = Shop::where('user_id', auth()->user()->id)->first();
@@ -146,7 +146,7 @@ class ProductController extends Controller
 
     }
 
-// 商品詳細
+// 商品詳細ページ
     public function showProductDetail($cakeId)
     {
         $products = Cake::get()->where('id', $cakeId);
@@ -159,7 +159,7 @@ class ProductController extends Controller
         
     }
 
-// 商品編集
+// 商品編集ページ
     public function updateIndexPage(Cake $cake)
     {
         $cakeImagePath = $cake->images()->first()->tmp_name;
@@ -188,7 +188,7 @@ class ProductController extends Controller
     
         return view('products/product-update', compact('cakeImagePath', 'cake', 'image_name'));
     }
-// 商品編集を保存
+// 商品編集処理
     public function updateStore(Request $request, Cake $cake)
     {
         $request->validate([
@@ -240,7 +240,8 @@ class ProductController extends Controller
     public function destroy($cakeId)
     {
         Cake::where('id', $cakeId)->delete();
-        Image::where('cake_id', $cakeId)->delete();
+        // Image::where('cake_id', $cakeId)->delete();
+        // return view('products/product');
         return redirect('/product');
     }
 

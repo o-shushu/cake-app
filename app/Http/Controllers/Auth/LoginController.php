@@ -14,12 +14,13 @@ class LoginController extends Controller
     /**
      * Display the login view.
      */
-// LoginPage
+// ログインページ
     public function showLoginPage()
     {
         return view('auth/login');
     }
 
+// ログインアクションを実行
     public function actionLogin(Request $request)
     {
         $credentials = $request->validate([
@@ -40,18 +41,19 @@ class LoginController extends Controller
     
     }
 
-// RegisterPage
+// 新規登録ページ
     public function showRegisterPage()
     {
         $residences = Residence::all();
         return view('auth/register', compact('residences'));
     }
 
+// 新規情報編集保存
     public function storeRegister(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|string',
+            'email' => 'required|email|string|unique:users,email',
             'password' => 'required|confirmed|string|min:8',
             'tel' => 'required|numeric|digits_between:10,11',
             'residence' => 'required',

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 @if(isset($messageRegister))
-    <p class="text-red-500 text-center">{{ $messageRegister}}</p>
+    <p class="messageRegister text-red-500 text-center">{{ $messageRegister}}</p>
 @endif
     <div class="max-w-lg mx-auto mt-10 bg-gray-100 border border-gray-200 p-6 rounded-xl ">
         <h1 class="text-center font-bold text-xl">新規登録</h1>

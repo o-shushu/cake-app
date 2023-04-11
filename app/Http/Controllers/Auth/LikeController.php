@@ -9,7 +9,7 @@ use App\Models\Shop;
 
 class LikeController extends Controller
 {
-//店舗のいいねを付け
+//店舗にいいねを付け
     public function shopLike(Request $request)
     {
         $data = $request->validate([
@@ -35,7 +35,7 @@ class LikeController extends Controller
         return response('Error', 200);
     }
 
-//商品のいいねを付け
+//商品にいいねを付け
     public function cakeLike(Request $request)
     {
         $data = $request->validate([
@@ -52,12 +52,15 @@ class LikeController extends Controller
                 'cake_id' => $data['cake_id'],
                 'user_id' => $user_id
             ]);
-            return response('liked', 200);
+            $cake_likes = Like::where('cake_id', $data['cake_id'])->count();
+            
+            return response(['status'=> 'liked', 'total_likes' => $cake_likes], 200);  
         }
 
         if(!is_null($already_liked)){
             $already_liked->delete();
-            return response('unliked', 200);
+            $cake_likes = Like::where('cake_id', $data['cake_id'])->count();
+            return response(['status'=> 'unliked', 'total_likes' => $cake_likes], 200);
         }
 
         return response('Error', 200);

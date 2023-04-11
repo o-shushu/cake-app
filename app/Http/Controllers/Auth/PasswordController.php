@@ -32,7 +32,7 @@ class PasswordController extends Controller
         $this->userTokenRepository = $userTokenRepository;
     }
 
-// パスワード再設定メール送信フォームページ
+// パスワード再設定メール送信ページ
     public function emailFormResetPassword()
     {
         return view('user.reset_password.email_form');
@@ -45,10 +45,9 @@ class PasswordController extends Controller
             $user = $this->userRepository->findFromEmail($request->email);
             $userToken = $this->userTokenRepository->updateOrCreateUserToken($user->id);
             Log::info(__METHOD__ . '...ID:' . $user->id . 'のユーザーにパスワード再設定用メールを送信します。');
-            $model = new UserResetPasswordMail($user, $userToken);
-            return $model;
+            Mail::send(new UserResetPasswordMail($user, $userToken));
             Log::info(__METHOD__ . '...ID:' . $user->id . 'のユーザーにパスワード再設定用メールを送信しました。');
-            
+
         } catch(Exception $e) {
             Log::error(__METHOD__ . '...ユーザーへのパスワード再設定用メール送信に失敗しました。 request_email = ' . $request->email . ' error_message = ' . $e);
             return redirect()->route('password_reset.email.form')
@@ -78,6 +77,7 @@ class PasswordController extends Controller
         if (!$request->hasValidSignature()) {
             abort(403, 'URLの有効期限が過ぎたためエラーが発生しました。パスワードリセットメールを再発行してください。');
         }
+        
         $resetToken = $request->reset_token;
         try {
             $userToken = $this->userTokenRepository->getUserTokenfromToken($resetToken);

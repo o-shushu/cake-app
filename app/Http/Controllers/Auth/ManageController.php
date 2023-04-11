@@ -34,7 +34,7 @@ class ManageController extends Controller
         }
       
         $residence = Residence::all()->where('id', $residence_id);
-
+        
         return view('users/user-update', compact('userInformation', 'residence', 'residences'));
     }
 

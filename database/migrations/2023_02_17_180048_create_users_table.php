@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('residence_id')->comment('県地ID');
             $table->string('name', 20)->comment('ユーザーネーム');
-            $table->string('email', 32)->comment('メールアドレス');
+            $table->string('email', 100)->comment('メールアドレス');
             $table->string('password', 255)->comment('パスワード');
             $table->string('tel', 32)->comment('電話番号');
             $table->string('type', 20)->comment('属性');

@@ -39,14 +39,16 @@ class UserController extends Controller
         return view('users/user-update', compact('userInformation', 'residence', 'residences'));
     }
 
-//ユーザー情報保存
+//ユーザー情報処理
     public function userStore(Request $request)
     {
+        
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|string',
             'tel' => 'required|numeric|digits_between:10,11',
             'residence' => 'required',
+            'userId' => 'required',
         ]);
 
         $user_id = $request->input('userId');
@@ -54,7 +56,7 @@ class UserController extends Controller
         $user_email = $request->input('email');
         $user_tel = $request->input('tel');
         $user_residence = $request->input('residence');
-
+       
         if(auth()->user()->type !== '0'){
             User::where('id', auth()->user()->id)
             ->update(['name'=>$user_name, 'email'=>$user_email, 'tel'=>$user_tel, 'residence_id'=>$user_residence]) ;
@@ -62,24 +64,22 @@ class UserController extends Controller
         }
 
         User::where('id', $user_id)
-            ->update(['name'=>$user_name, 'email'=>$user_email, 'tel'=>$user_tel, 'residence_id'=>$user_residence]) ;
+        ->update(['name'=>$user_name, 'email'=>$user_email, 'tel'=>$user_tel, 'residence_id'=>$user_residence]) ;
+    
+        $userInformation = User::where('id', $user_id)->first();
+        $type = $userInformation->type;
         
-        return redirect('user/detail');
+        if($type == 2){
+            $user = 'shopkeepers';
+            $users = User::where('type',2)->paginate(10);
+            return view('manager/manage-users',compact('users','user'));
+        }
+
+        $users = User::where('type',1)->paginate(10);
+        return view('manager/manage-users',compact('users'));
     }
 
-//ユーザー注文ページ
-    // public function userOrderPage($cakeId){
-
-    //     $products = Cake::get()->where('id', $cakeId);
-    //     $cakeImages = Image::get()->where('cake_id', $cakeId);
-    //     foreach($cakeImages as $cakeImage){
-    //         $cakeImagePath = $cakeImage->tmp_name;
-    //     }
-    //     dd($cakeId);
-    //     return view('users/user-order', compact('products', 'cakeImagePath'));
-    // }
-
-//商品詳細ではないページからカートに入れる
+//商品詳細ページからカートに入れる
     public function inputCart(Request $request)
     {
         if(!isset(auth()->user()->id)){
@@ -116,7 +116,7 @@ class UserController extends Controller
         return response('Error', 200);
     }
 
-//商品詳細ページからカートに入れる
+//商品詳細ではないページからカートに入れる
     public function shopsInputCart(Request $request)
     {
         if(!isset(auth()->user()->id)){
@@ -221,13 +221,14 @@ class UserController extends Controller
         $order->total_price = $request->input('total_price');
         $order->payment_method = $request->input('payment_method');
         $order->delivery_place = $request->input('delivery_place');
-        $order->content = $request->input('content');
+        $order->content = $request->input('content');   
+        $order->flag = 1;//１理論存在、０理論削除
         $order->save();
 
-        $orderId = Order::where('orderNo',$orderNo)->first();
-        
+        $order = Order::where('orderNo',$orderNo)->first();
+        $orderId = $order->id;
         Cart::with('cake')->with('shop')->where('user_id',auth()->user()->id)->where('pay_status',0)
-        ->update(['order_id'=>$orderId],['pay_status'=>1]);
+        ->update(['order_id'=>$orderId]);
         Cart::with('cake')->with('shop')->where('order_id',$orderId)->update(['pay_status'=>1]);
         
         return redirect('user/indexCart');
@@ -237,7 +238,16 @@ class UserController extends Controller
 //会員ユーザーの購入記録ページ
     public function buyCodeIndex()
     {
-        $orders = Order::where('user_id',auth()->id())->get();
+        $orders = Order::where('user_id',auth()->id())->where('flag',1)->get();
+        return view('users/user-code',compact('orders'));
+    }
+
+//会員ユーザーの購入記録削除
+    public function buyCodeDelete($orderId)
+    {
+
+        Order::where('id',$orderId)->update(['flag'=>0]);
+        $orders = Order::where('user_id',auth()->id())->where('flag',1)->get();
         return view('users/user-code',compact('orders'));
     }
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    <div>
-        <div class="max-w-lg mx-auto mt-10 bg-gray-100 border border-gray-200 p-6 rounded-xl ">
+    <div class="relative" style="top:18vh">
+        <div class="w-max mx-auto bg-gray-100 border border-gray-200 p-6 rounded-xl shadow-xl">
             <h1 class="text-center font-bold text-xl">ログイン</h1>
             @isset($errors)
                 <p class="text-red-500">{{ $errors->first('message') }}</p>

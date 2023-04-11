@@ -18,18 +18,69 @@ class ImageSeeder extends Seeder
      */
     public function run()
     {
-        $shops = Shop::all();
-
-        foreach($shops as $shop){
-            DB::table('images')->insert([
-                [
-                    'cake_id' => 0,
-                    'shop_id' => $shop->id,
-                    'image_name' => 'cafe1.jpg',
-                    'tmp_name' => 'storage/insertProducts/cafe1.jpg',
-                ]
-            ]);
-        }
+        DB::table('images')->insert([
+            [
+                'cake_id' => 0,
+                'shop_id' => 1,
+                'image_name' => 'cafe1.jpg',
+                'tmp_name' => 'storage/insertProducts/cafe1.jpg',
+            ],
+            [
+                'cake_id' => 0,
+                'shop_id' => 2,
+                'image_name' => 'cafe1.jpg',
+                'tmp_name' => 'storage/insertProducts/cafe2.jpg',
+            ],
+            [
+                'cake_id' => 0,
+                'shop_id' => 3,
+                'image_name' => 'cafe1.jpg',
+                'tmp_name' => 'storage/insertProducts/cafe3.jpg',
+            ],
+            [
+                'cake_id' => 0,
+                'shop_id' => 4,
+                'image_name' => 'cafe1.jpg',
+                'tmp_name' => 'storage/insertProducts/cafe4.jpg',
+            ],
+            [
+                'cake_id' => 0,
+                'shop_id' => 5,
+                'image_name' => 'cafe1.jpg',
+                'tmp_name' => 'storage/insertProducts/cafe5.jpg',
+            ],
+            [
+                'cake_id' => 0,
+                'shop_id' => 6,
+                'image_name' => 'cafe1.jpg',
+                'tmp_name' => 'storage/insertProducts/cafe6.jpg',
+            ],
+            [
+                'cake_id' => 0,
+                'shop_id' => 7,
+                'image_name' => 'cafe1.jpg',
+                'tmp_name' => 'storage/insertProducts/cafe7.jpg',
+            ],
+            [
+                'cake_id' => 0,
+                'shop_id' => 8,
+                'image_name' => 'cafe1.jpg',
+                'tmp_name' => 'storage/insertProducts/cafe1.jpg',
+            ],
+            [
+                'cake_id' => 0,
+                'shop_id' => 9,
+                'image_name' => 'cafe1.jpg',
+                'tmp_name' => 'storage/insertProducts/cafe2.jpg',
+            ],
+            [
+                'cake_id' => 0,
+                'shop_id' => 10,
+                'image_name' => 'cafe1.jpg',
+                'tmp_name' => 'storage/insertProducts/cafe3.jpg',
+            ],
+        ]);
+       
 
         DB::table('images')->insert([
             [

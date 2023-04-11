@@ -2,71 +2,73 @@
 @section('content')
 <content>
 <!-- 商品詳細-->
-            <div class="w-2/3 m-auto pt-20">
-                <h2 class="pb-10">商品詳細</h2>
-                <div class="flex">
-                    <div class="w-1/3" >
-                        @if(isset($cakeImagePath))
-                            <img src="{{asset($cakeImagePath)}}">
-                        @endif
+            <div class="w-2/3 m-auto">
+                <h2 class="pb-3 ">
+                  <span class="font-bold border-t-2 border-yellow-400 text-2xl">商品詳細</span>  
+                </h2>
+                <div class="block sm:flex gap-10">
+                    <div class="w-full sm:w-1/2 h-40 mb-3" >
+                    @if(isset($cakeImagePath))
+                        <img class="h-40" src="{{asset($cakeImagePath)}}">
+                    @endif
                     </div>
-                    <div>
-                        @foreach ($products as $product)
-                        <div class="p-6"> 
-                            <label for="">詳細</label><br/>
-                            <p>{{ $product->cake_content}}</p>
-                        </div>
-                        
-                        <div class="flex">
-                            <div class="text-center mx-10"> 
-                                <label for="">ネーム</label>
-                                <p>{{ $product->cake_name}}</p>
-                            </div>
-
-                            <div class="text-center mx-10"> 
-                                <label for="">カテゴリー</label>
-                                <p>{{ $product->cake_category}}</p>
-                            </div>
-
-                            <div class="text-center mx-10"> 
-                                <label for="">価格</label>
-                                <p id="price">price</p>
-                            </div>
-                            
-                            <div>
-                                <label for="">サイズ</label>
-                                <select id="size" class="border border-gray-400 p-2 w-full">
-                                @foreach($product->cakecontent as $value)
-                                    <option value="{{ $value->cake_price }}">{{ $value->cake_size }}</option>
-                                @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        @endforeach
-                        <div>
-                            <label for="">個数</label>
-                            <i class="fa-solid fa-circle-minus"></i>
-                            <span id="edit_area">1</span>
-                            <i class="fa-solid fa-circle-plus"></i>
-                        </div>
+                @foreach ($products as $product)
+                    <div class="w-full sm:w-1/2 border border-gray-300 h-40"> 
+                        <label class="font-bold">詳細:</label><br/>
+                        <p>{{ $product->cake_content}}</p>
                     </div>
                 </div>
-                <div class="flex text-center mt-5">
+                <div class="block gap-5 sm:flex sm:gap-10 justify-around mt-3 text-left">
+                    <div> 
+                        <label class="font-bold">商品名:</label>
+                        <p>{{ $product->cake_name}}</p>
+                    </div>
+
+                    <div> 
+                        <label class="font-bold">カテゴリー:</label>
+                        <p>{{ $product->cake_category}}</p>
+                    </div>
+
+                    <div> 
+                        <label class="font-bold">価格:</label>
+                        <p id="price">price</p>
+                    </div>        
                     <div>
-                        <a href="{{ url()->previous() }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
+                        <label class="font-bold">サイズ:</label>
+                        <select id="size" class="border border-gray-400 p-2 w-full">
+                        @foreach($product->cakecontent as $value)
+                            <option value="{{ $value->cake_price }}">{{ $value->cake_size }}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                
+                @endforeach
+                    <div>
+                        <label for="">個数</label>
+                        <i class="fa-solid fa-circle-minus"></i>
+                        <span id="edit_area">1</span>
+                        <i class="fa-solid fa-circle-plus"></i>
+                    </div>
+                </div>
+                <div class="block sm:flex justify-around mt-8 text-center mb-3">
+                @if(isset(auth()->user()->type) && auth()->user()->type === '0')
+                    <div class="my-10">
+                        <a href="{{ url()->previous() }}" class="bg-blue-400 text-white rounded py-2.5 px-6 my-5 hover:bg-blue-500">
                         戻る
                         </a>
                     </div>
-                    <div>
-                        <a data-cake-id="{{$product->id}}" data-shop-id="{{$product->shop_id}}" class="cart-input bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
+                @else
+                    <div class="my-10">
+                        <a href="{{ url()->previous() }}" class="bg-blue-400 text-white rounded py-2.5 px-6 my-5 hover:bg-blue-500">
+                        戻る
+                        </a>
+                    </div>    
+                    <div class="my-10">
+                        <a data-cake-id="{{$product->id}}" data-shop-id="{{$product->shop_id}}" class="cart-input bg-blue-400 text-white rounded py-2.5 px-6 my-5 hover:bg-blue-500 cursor-pointer">
                         カートに入れる
                         </a>
                     </div>
-                    <div>
-                        <a href="{{ route('update.index', $product->id) }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
-                            予約
-                        </a>
-                    </div>
+                @endif
                 </div>
             </div>
     </content>

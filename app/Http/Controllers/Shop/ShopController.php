@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Image;
 use App\Models\Shop;
 use App\Models\Like;
+use App\Models\Cake;
+use GrahamCampbell\ResultType\Success;
 
 class ShopController extends Controller
 {
@@ -40,7 +42,7 @@ class ShopController extends Controller
         return view('shops/shop-index', compact('image_path', 'image_name', 'image_type'));
     }
 
-//店舗情報を保存
+//店舗情報処理
     public function shopUpload(Request $request)
     {
         $request->validate([
@@ -55,7 +57,7 @@ class ShopController extends Controller
         $shop->residence = $request->input('residence');
         $shop->shop_name = $request->input('shop_name');
         $shop->tel = $request->input('tel');
-        $shop->remark = $request->input('remark');
+        $shop->remark = nl2br($request->input('remark'));
         $shop->save();
 
         $value = Shop::all()->where('user_id', $shop->user_id);
@@ -125,7 +127,7 @@ class ShopController extends Controller
         return view('shops/shop-update', compact('information', 'image_path', 'image_name', 'image_type','shopId'));
     }
 
-//店舗情報編集を保存 
+//店舗情報編集処理
     public function shopUpdateStore(Request $request)
     {
         $tmp_name = $request->input('image_path');
@@ -135,13 +137,13 @@ class ShopController extends Controller
         $residence = $request->input('residence');
         $shopId = $request->input('shopId');
         $tel = $request->input('tel');
-        $remark = $request->input('remark');
+        $remark = nl2br($request->input('remark'));
 
         Shop::where('id',$shopId)->update(
             ['shop_name'=>$shop_name,
              'residence'=>$residence,
              'tel'=>$tel,
-             'remark'=>$remark
+             'remark'=>nl2br($remark)
             ]);
         Image::where('cake_id',0)->where('shop_id',$shopId)->update(
             ['tmp_name'=>$tmp_name,
@@ -157,24 +159,25 @@ class ShopController extends Controller
 //ホームページの店一覧
     public function home()
     {
-    $cakesLike = Like::select(Like::raw('cake_id, count(*) as total'))
-                        ->whereNotNull('cake_id')
-                        ->orderBy('total', 'desc')->groupBy('cake_id')
-                        ->with('cake','cake.shop','cake.images')->get();
+        $cakesLike = Like::select(Like::raw('cake_id, count(*) as total'))
+                            ->whereNotNull('cake_id')
+                            ->orderBy('total', 'desc')->groupBy('cake_id')
+                            ->with('cake','cake.shop','cake.images')->get();
+        $chunkCakeLike = $cakesLike->chunk(3);//三個ずつ分けて
 
-    $shops = Shop::withCount('likes')->orderBy('created_at', 'desc')->paginate(4);
-    $like_model = new Shop;
-    $chunkCakeLike = $cakesLike->chunk(3);//三個ずつ分けて
+        $shops = Shop::withCount('likes')->orderBy('created_at', 'desc')->paginate(4);
+        
 
-    $shopsLike = Like::select(Like::raw('shop_id, count(*) as total'))->whereNotNull('shop_id')
-                        ->orderBy('total', 'desc')->groupBy('shop_id')
-                        ->with(['shop','shop.images' => function($query){
-                            $query->where('cake_id',0); 
-                        }])->get();
+        $shopsLike = Like::select(Like::raw('shop_id, count(*) as total'))->whereNotNull('shop_id')
+                            ->orderBy('total', 'desc')->groupBy('shop_id')
+                            ->with(['shop','shop.images' => function($query){
+                                $query->where('cake_id',0); 
+                            }])->get();
+        $chunkShopLike = $shopsLike->chunk(3);
+        $likeShop_model = new Shop;
+        $likeCake_model = new Cake;
 
-    $chunkShopLike = $shopsLike->chunk(3);
-    
-    return view('welcome', compact('shops','like_model','cakesLike','chunkCakeLike','chunkShopLike'));
+        return view('welcome', compact('shops','likeShop_model','likeCake_model','cakesLike','chunkCakeLike','chunkShopLike'));
 
     }
 }
