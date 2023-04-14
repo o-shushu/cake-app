@@ -18,31 +18,31 @@
         @if(isset($cakes)) 
         <div class="grid-cols-1 md:gap-x-20 sm:grid-cols-2 grid justify-between lg:gap-x-40">
             @foreach ($cakes as $cake)
-            <div class="h-64 sm:h-80 mt-5 bg-gray-100 border border-gray-200 p-2 rounded-xl text-center">
+            <div class="mt-5 bg-gray-100 border border-gray-200 p-2 rounded-xl text-center">
                 @foreach($cake->images as $cakeImage)
                 <div class="h-4/5">
                     <a class="h-3/4 w-3/4 mx-0" href="{{ route('home.ProductDetail', $cake->id) }}">
-                        <img class="h-3/4 w-full mx-auto rounded" src="{{ asset($cakeImage->tmp_name) }}">
+                        <img class="h-[90%] w-full mx-auto rounded" src="{{ asset($cakeImage->tmp_name) }}">
                     </a>
                     <p class="mt-4">{{$cake->cake_name}}</p>
                 </div>
                 @endforeach
-                <div class="flex justify-around w-full h-1/5 bg-yellow-400 rounded hover:bg-yellow-500">
+                <div class="flex justify-around w-full h-1/5">
                     @auth
                         @if($likeCake_model->like_exist(Auth::user()->id,$cake->id))
-                        <div class="m-auto">
+                        <div class="text-2xl m-auto">
                             <a class="cake-like-toggle text-red-500 cursor-pointer" data-cake-id="{{$cake->id}}"><i class="fas fa-heart"></i></a>
                             <span class="likesCount">{{$cake->likes_count}}</span>
                         </div>
                         @else
-                        <div class="m-auto">
+                        <div class="text-2xl m-auto">
                             <a class="cake-like-toggle cursor-pointer" data-cake-id="{{$cake->id}}"><i class="fas fa-heart"></i></a>
                             <span class="likesCount">{{$cake->likes_count}}</span>
                         </div>
                         @endif 
                     @endauth
                     @guest
-                        <div class="m-auto">
+                        <div class="text-2xl m-auto">
                             <i class="fas fa-heart"></i>
                             <span class="likesCount">{{$cake->likes_count}}</span>
                         </div>
@@ -54,8 +54,8 @@
                         </a>
                     </div>
                     @else
-                    <div class="m-auto">
-                        <a data-cake-id="{{$cake->id}}" data-shop-id="{{$cake->shop_id}}" class="shopsInputCart cursor-pointer">
+                    <div class="text-2xl m-auto">
+                        <a data-cake-id="{{$cake->id}}" data-shop-id="{{$cake->shop_id}}" class="shopsInputCart cursor-pointer text-xl text-white font-semibold bg-emerald-500 hover:bg-emerald-700 px-4 py-3 rounded-lg shadow-sm">
                         カートに入れる
                         </a>
                     </div>

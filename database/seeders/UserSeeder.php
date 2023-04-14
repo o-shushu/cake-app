@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
         //会員ユーザー
         User::create([
             'name' => '田辺 香織',
-            'email' => 'pyamada@yahoo.co.jp',
+            'email' => 'sakura@s89fbavi.shop',
             'password' =>'password',
             'tel' => '09084300866',
             'residence_id' => 1,

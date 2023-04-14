@@ -243,23 +243,6 @@ class ProductController extends Controller
         return redirect('/product');
     }
 
-// 価格サイズ削除
-    public function priceSizeDelete(Request $request)
-    { 
-        $data = $request->validate([
-            'delete-id' => 'required',
-        ]);
-       
-        Cakecontent::where('id', $data['delete-id'])->delete();
-
-        $haved = Cakecontent::where('id', $data['delete-id'])->first();
-        if(is_null($haved)){
-            return response('Success', 200);
-        }
-        
-        return response('Error', 200);
-    }
-
 // 商品削除
     public function destroy($cakeId)
     {
