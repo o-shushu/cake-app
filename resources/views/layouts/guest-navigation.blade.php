@@ -3,7 +3,7 @@
     <div class="flex m-5 w-full m-auto justify-between sm:w-2/3" style="height: 72px;">
         <!-- Logo -->
         <div class="w-1/3 my-auto mx-0">
-            <a href="{{ route('home') }}"><img class="w-full" src="{{asset('img/logo.png')}}" alt="menu-logo"></a>
+            <a href="{{ route('home') }}"><img class="w-full h-16" src="{{asset('img/logo.png')}}" alt="menu-logo"></a>
         </div>
 
         <!-- Navigation Links -->
@@ -23,7 +23,7 @@
                         <a class="block px-4 py-3 hover:bg-gray-300" href="{{route('cakeLikes.index')}}">商品いいね</a>
                     </div>
                 </div>
-                <li class="text-sm sm:text-base px-4 m-auto pr-3"><a href="/cake-app/public/#products">おすすめ</a></li>
+                <li class="text-sm sm:text-base px-4 m-auto pr-3"><a href="/#products">おすすめ</a></li>
                 <li class="text-sm sm:text-base px-4 m-auto pr-3"><a href="/cake-app/public/#shops">店舗一覧</a></li>
 
                 <div class="relative inline-block px-4 group">
@@ -111,8 +111,8 @@
                         </div>
                     </button>
                     <div class="absolute w-full bg-gray-100 z-10 hidden group-hover:block">
-                        <a class="block px-4 py-3 hover:bg-gray-300" href="/cake-app/public/#products">おすすめ</a>
-                        <a class="block px-4 py-3 hover:bg-gray-300" href="/cake-app/public/#shops">店舗一覧</a> 
+                        <a class="block px-4 py-3 hover:bg-gray-300" href="/#products">おすすめ</a>
+                        <a class="block px-4 py-3 hover:bg-gray-300" href="/#shops">店舗一覧</a> 
                         <a class="block px-4 py-3 hover:bg-gray-300" href="{{ route('user.detail') }}">ユーザー情報</a>
                         <a class="block px-4 py-3 hover:bg-gray-300" href="{{ route('buyCode.Index') }}">購入記録</a>
                         <a class="block px-4 py-3 hover:bg-gray-300" href="{{ route('logout.action') }}">ログアウト</a>
