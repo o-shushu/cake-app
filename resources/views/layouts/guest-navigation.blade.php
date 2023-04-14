@@ -78,8 +78,8 @@
         @if (auth()->user()->type === '1')
         <div>
             <ul class="hidden sm:flex my-6 mx-auto">
-                <li class="text-sm sm:text-base m-auto pr-3"><a href="/cake-app/public/#products">おすすめ</a></li>
-                <li class="text-sm sm:text-base m-auto pr-3"><a href="/cake-app/public/#shops">店舗一覧</a></li>
+                <li class="text-sm sm:text-base m-auto pr-3"><a href="#products">おすすめ</a></li>
+                <li class="text-sm sm:text-base m-auto pr-3"><a href="#shops">店舗一覧</a></li>
                 <li class="m-auto"><a href="{{ route('indexCart') }}"><i class="fa-solid fa-cart-plus"></i></a></li>
                 <div class="relative inline-block pl-0 sm:pl-4 group">
                     <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-yellow hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">

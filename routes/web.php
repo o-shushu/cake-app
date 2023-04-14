@@ -122,6 +122,8 @@ Route::group(['middleware' => ['auth', 'shop.check']], function() {
     Route::post('update/{cake}', [ProductController::class, 'updateConfirm'])->name('update.confirm');
     //商品編集処理
     Route::post('store/{cake}', [ProductController::class, 'updateStore'])->name('update.store');
+    //価格とサイズ削除
+    Route::post('price_size/delete', [ProductController::class, 'priceSizeDelete'])->name('priceSize.Delete');
     //商品削除
     Route::delete('product/detail/delete/{cakeId}', [ProductController::class, 'destroy'])->name('product.delete');
     //商品明細ページ

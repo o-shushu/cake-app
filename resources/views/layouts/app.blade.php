@@ -10,7 +10,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        @vite(['resources/css/app.css', 'resources/js/app.js' ,'resources/js/carousel.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     </head>
     <body class="h-full">
@@ -22,7 +22,7 @@
             @endif
         <!-- Page Content -->
         </header>
-        <div class="min-h-screen pt-28">
+        <div class="min-h-screen">
             <main class="relative">
                 @yield('content') 
             </main>

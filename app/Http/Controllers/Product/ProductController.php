@@ -191,6 +191,7 @@ class ProductController extends Controller
 // 商品編集処理
     public function updateStore(Request $request, Cake $cake)
     {
+        // dd($request->input('cakecontent'));
         $request->validate([
             'cake_name' => 'required|max:32',
             'cake_category' => 'required|max:32',
@@ -198,7 +199,8 @@ class ProductController extends Controller
             'cakecontent.*.cake_price' => 'required|numeric',
             'cakecontent.*.cake_size' => 'required',
         ]);
-
+        
+      
         DB::beginTransaction();
         try{
             
@@ -219,12 +221,17 @@ class ProductController extends Controller
                     'cake_price' => $cakecontent['cake_price'],
                     'cake_size' => $cakecontent['cake_size'],
                 ];
-                
                 if(array_key_exists('cakecontent_id', $cakecontent)){
-                    Cakecontent::where('id',$cakecontent['cakecontent_id'])->first()->update($data);
+                    if($cakecontent['cakecontent_id'] == $cakecontent['cake_price'] || $cake->id == $cakecontent['cake_size']){
+                        Cakecontent::where('id',$cakecontent['cakecontent_id'])->delete();
+                    }else{
+                        Cakecontent::where('id',$cakecontent['cakecontent_id'])->first()->update($data);
+                    }
+                    
                 }else{
                     Cakecontent::create($data);
                 }
+                
             }
             DB::commit();
             // ここまでを記述
@@ -234,6 +241,23 @@ class ProductController extends Controller
         }
       
         return redirect('/product');
+    }
+
+// 価格サイズ削除
+    public function priceSizeDelete(Request $request)
+    { 
+        $data = $request->validate([
+            'delete-id' => 'required',
+        ]);
+       
+        Cakecontent::where('id', $data['delete-id'])->delete();
+
+        $haved = Cakecontent::where('id', $data['delete-id'])->first();
+        if(is_null($haved)){
+            return response('Success', 200);
+        }
+        
+        return response('Error', 200);
     }
 
 // 商品削除

@@ -17,11 +17,13 @@ class ShopFactory extends Factory
      */
     public function definition()
     {
+        $phone = $this->faker->phoneNumber;
+        $phone = preg_replace("/[^0-9]/", "", $phone);
         return [
             'user_id' => User::factory(),
             'shop_name' => fake()->streetName() . '店',
             'residence' => fake()->address(),
-            'tel' => fake()->phoneNumber(),
+            'tel' => $phone,
             'remark' => $this->faker->sentence(5),
         ];
     }

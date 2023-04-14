@@ -1,9 +1,9 @@
 <!-- Primary Navigation Menu fixed z-10-->
 <div class="bg-yellow-300">
-    <div class="flex m-5 w-full m-auto justify-between sm:w-2/3">
+    <div class="flex w-full m-auto justify-between sm:w-2/3">
         <!-- Logo -->
         <div class="w-1/3 my-auto mx-0">
-            <a href="{{ route('home') }}"><img class="w-full" src="{{asset('img/logo.png')}}" alt="menu-logo"></a>
+            <a href="{{ route('home') }}"><img class="w-full md:h-14" src="{{asset('img/logo.png')}}" alt="menu-logo"></a>
         </div>
 
         <!-- Navigation Links -->

@@ -29,7 +29,7 @@
         <div class="text-center mb-3">
             <span class="font-bold border-t-2 border-yellow-400 text-2xl">おすすめ商品</span>
         </div>
-        <button id="moreLook" class="bg-yellow-400 rounded h-8 mb-3">もっと見る</button>
+        <button id="moreLook" class="bg-yellow-400 rounded h-8 mb-3 hover:bg-yellow-500">もっと見る</button>
         <div class="block sm:flex relative">
             @if(isset($chunkCakeLike))
             @foreach($chunkCakeLike[0] as $item)
@@ -37,22 +37,22 @@
                     <a href="{{ route('home.ProductDetail', $item->cake->id) }}">
                         <img class="h-3/4 w-60 mx-auto rounded" src="{{ asset($item->cake->images->first()->tmp_name) }}">
                     </a>
-                    <h3 class="text-center">{{$item->cake->cake_name}}</h3>
+                    <h3 class="text-center text-lg">{{$item->cake->cake_name}}</h3>
                     @auth
                         @if($likeCake_model->like_exist(Auth::user()->id,$item->cake->id))
-                            <div class="m-auto">
+                            <div class="text-2xl">
                                 <a class="cake-like-toggle text-red-500 cursor-pointer" data-cake-id="{{$item->cake->id}}"><i class="fas fa-heart"></i></a>
                                 <span class="likesCount">{{$item->total}}</span>
                             </div>
                         @else
-                            <div class="m-auto">
+                            <div class="text-2xl">
                                 <a class="cake-like-toggle cursor-pointer" data-cake-id="{{$item->cake->id}}"><i class="fas fa-heart"></i></a>
                                 <span class="likesCount">{{$item->total}}</span>
                             </div>
                         @endif 
                     @endauth
                     @guest
-                        <div class="m-auto">
+                        <div class="text-2xl">
                             <i class="fas fa-heart"></i>
                             <span class="likesCount">{{$item->total}}</span>
                         </div>
@@ -70,29 +70,29 @@
                 <div class="grid-cols-1 md:gap-x-20 sm:grid-cols-2 grid justify-between lg:gap-x-40">
                     @if(isset($cakesLike)) 
                     @foreach ($cakesLike as $item)                 
-                        <div class="h-4/5 mt-5 bg-gray-100 border border-gray-200 p-2 rounded-xl text-center">
-                            <div class="h-4/5">
+                    <div class="mt-5 bg-gray-100 border border-gray-200 p-2 rounded-xl text-center">
+                        <div class="h-4/5">
                             <a class="h-3/4 w-3/4 mx-0" href="{{ route('home.ProductDetail', $item->cake->id) }}">
-                                <img class="h-3/4 w-full mx-auto rounded" src="{{ asset($item->cake->images->first()->tmp_name) }}">
+                                <img class="h-[90%] w-full mx-auto rounded" src="{{ asset($item->cake->images->first()->tmp_name) }}">
                             </a>
-                            <div class="mt-4">{{$item->cake->cake_name}}</div>
+                            <p class="text-xl">{{$item->cake->cake_name}}</p>
                         </div>
-                        <div class="flex justify-around w-full h-1/5 bg-yellow-400 rounded hover:bg-yellow-500">
+                        <div class="flex justify-around w-full h-1/5">
                             @auth
                                 @if($likeCake_model->like_exist(Auth::user()->id,$item->cake->id))
-                                <div class="m-auto">
+                                <div class="text-2xl m-auto">
                                     <a class="cake-like-toggle text-red-500 cursor-pointer" data-cake-id="{{$item->cake->id}}"><i id="click{{$item->cake->id}}" class="fas fa-heart"></i></a>
                                     <span class="likesCount">{{$item->total}}</span>
                                 </div>
                                 @else
-                                <div class="m-auto">
+                                <div class="text-2xl m-auto">
                                     <a class="cake-like-toggle cursor-pointer" data-cake-id="{{$item->cake->id}}"><i id="click{{$item->cake->id}}" class="fas fa-heart"></i></a>
                                     <span class="likesCount">{{$item->total}}</span>
                                 </div>
                                 @endif 
                             @endauth
                             @guest
-                                <div class="m-auto">
+                                <div class="text-2xl m-auto">
                                     <i class="fas fa-heart"></i>
                                     <span class="likesCount">{{$item->total}}</span>
                                 </div>
@@ -101,7 +101,7 @@
 
                             @else
                             <div class="m-auto">
-                                <a data-cake-id="{{$item->cake->id}}" data-shop-id="{{$item->cake->shop->id}}" class="shopsInputCart cursor-pointer">
+                                <a data-cake-id="{{$item->cake->id}}" data-shop-id="{{$item->cake->shop->id}}" class="shopsInputCart cursor-pointer text-xl text-white font-semibold bg-emerald-500 hover:bg-emerald-700 px-4 py-3 rounded-lg shadow-sm">
                                 カートに入れる
                                 </a>
                             </div>
@@ -126,29 +126,31 @@
             @php
                 $shopImages = $shop->images()->shopImages()->get();
             @endphp
-            <div class="h-4/5 mt-5 bg-gray-100 border border-gray-200 p-2 rounded-xl text-center shadow-lg">
+            <div class="mt-5 bg-gray-100 border border-gray-200 p-2 rounded-xl text-center shadow-lg">
                 @foreach($shopImages as $shopImage)
-                <a href="{{ route('home.Product', $shopImage->shop_id) }}">
-                    <img class="h-3/4 w-full mx-auto rounded" src="{{ asset($shopImage->tmp_name) }}" alt="">
-                </a>
+                <div class="h-4/5">
+                    <a href="{{ route('home.Product', $shopImage->shop_id) }}">
+                        <img class="h-[90%] w-full mx-auto rounded" src="{{ asset($shopImage->tmp_name) }}" alt="">
+                    </a>
+                </div>
                 @endforeach
-                <div class="flex justify-around mt-2">
-                    <p class="">{{$shop->shop_name}}</p>                           
+                <div class="flex justify-around w-full h-1/5">
+                    <p class="text-xl">{{$shop->shop_name}}</p>                           
                     @auth
                         @if($likeShop_model->like_exist(Auth::user()->id,$shop->id))
-                        <div>
-                            <a id="js-like-toggle" class="js-like-toggle text-red-500 cursor-pointer" data-shop-id="{{$shop->id}}"><i class="fas fa-heart"></i></a>
-                            <span class="likesCount">{{$shop->likes_count}}</span>
+                        <div class="text-2xl">
+                            <a id="js-like-toggle" class="js-like-toggle text-red-500 cursor-pointer text-2xl" data-shop-id="{{$shop->id}}"><i class="fas fa-heart"></i></a>
+                            <span class="likesCount text-2xl">{{$shop->likes_count}}</span>
                         </div>
                         @else
-                        <div>
+                        <div class="text-2xl">
                             <a class="js-like-toggle cursor-pointer" data-shop-id="{{$shop->id}}"><i class="fas fa-heart"></i></a>
                             <span class="likesCount">{{$shop->likes_count}}</span>
                         </div>
                         @endif 
                     @endauth
                     @guest
-                        <div>
+                        <div class="text-2xl">
                             <i class="fas fa-heart"></i>
                             <span class="likesCount">{{$shop->likes_count}}</span>
                         </div>
@@ -159,7 +161,7 @@
             @endif  
         </div>
         <div class="mb-3">
-            <div class="justify-center">{{ $shops->links() }}</div>
+            <div class="justify-center mt-6">{{ $shops->links() }}</div>
         </div>
     </div>
 </content>

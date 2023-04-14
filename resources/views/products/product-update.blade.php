@@ -54,9 +54,11 @@
                         <div>価格とサイズ:</div>
                         @foreach($cake->cakecontent as $value)
                             <input type="hidden" name ="cakecontent[{{$loop->index}}][cakecontent_id]" value="{{$value->id}}">
+                            <input type="hidden" name ="cakecontent[{{$loop->index}}][cake_price]" value="{{$value->id}}">
+                            <input type="hidden" name ="cakecontent[{{$loop->index}}][cake_size]" value="{{$value->id}}">
                             <input type="text" id="inputprice_{{$loop->index}}" name="cakecontent[{{$loop->index}}][cake_price]" class="rounded" placeholder="価格" value="{{ $value->cake_price }}">
                             <input type="text" id="inputsize_{{$loop->index}}" name="cakecontent[{{$loop->index}}][cake_size]" class="rounded" placeholder="サイズ" value="{{ $value->cake_size }}">
-                            <button id="0" onclick="deleteBtn(this)" class="bg-red-300 hover:bg-red-500 rounded">削除</button>
+                            <button id="{{$loop->index}}" onclick="deleteBtn(this)" class="bg-red-300 hover:bg-red-500 rounded">削除</button>
                         @endforeach
                     </div>
                     <div class="flex justify-between">
@@ -101,14 +103,14 @@
     }
 
     function deleteBtn(target) {
-    var target_id = target.id;
-    var parent = document.getElementById('form_area');
-    var price_id = document.getElementById('inputprice_' + target_id);
-    var size_id = document.getElementById('inputsize_' + target_id);
-    var tgt_id = document.getElementById(target_id);
-    parent.removeChild(price_id);
-    parent.removeChild(size_id);
-    parent.removeChild(tgt_id);	
+        var target_id = target.id;
+        var parent = document.getElementById('form_area');
+        var price_id = document.getElementById('inputprice_' + target_id);
+        var size_id = document.getElementById('inputsize_' + target_id);
+        var tgt_id = document.getElementById(target_id);
+        parent.removeChild(price_id);
+        parent.removeChild(size_id);
+        parent.removeChild(tgt_id);	
     }
 </script>
 @endsection
