@@ -87,7 +87,7 @@ $(function() {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: '/cake-app/public/orderStatus',
+            url: '/orderStatus',
             type: 'POST',
             data:{
                 'order_status': $this.val(),
@@ -109,7 +109,7 @@ $(function() {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: '/cake-app/public/shop/like',
+            url: '/shop/like',
             type: 'POST',
             data:{
                 'shop_id': $this.data('shop-id')
@@ -134,7 +134,7 @@ $(function() {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: '/cake-app/public/cake/like',
+            url: '/cake/like',
             type: 'POST',
             data:{
                 'cake_id': $this.data('cake-id')
@@ -166,7 +166,7 @@ $(function() {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: '/cake-app/public/user/inputCart',
+            url: '/user/inputCart',
             type: 'POST',
             data:{
                 'cake_id': $this.data('cake-id'),
@@ -194,7 +194,7 @@ $(function() {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: '/cake-app/public/user/shopsInputCart',
+            url: '/user/shopsInputCart',
             type: 'POST',
             data:{
                 'cake_id': $this.data('cake-id'),
