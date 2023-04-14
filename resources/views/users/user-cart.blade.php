@@ -114,7 +114,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: '/cake-app/public/user/editCart',
+            url: '/user/editCart',
             type: 'POST',
             data:{
                 'cake_amount': amount,
@@ -141,7 +141,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '/cake-app/public/user/editCart',
+                url: '/user/editCart',
                 type: 'POST',
                 data:{
                     'cake_amount': amount,
