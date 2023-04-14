@@ -28,7 +28,7 @@
                     <td>{{$order->created_at}}</td>
                     <td>
                     <a href="{{route('buyCode.Detail',$order->id)}}" class="bg-blue-400 rounded hover:bg-blue-500">詳細</a>
-                    <a href="{{route('buyCode.Delete',$order->id)}}" class="bg-red-400 rounded hover:bg-red-500">削除</a>
+                    <a href="{{route('buyCode.Delete',$order->id)}}" class="bg-red-400 rounded hover:bg-red-500" onclick=" return confirm('本当に削除しますか？')">削除</a>
                 </td>
             </tr>
             @endforeach

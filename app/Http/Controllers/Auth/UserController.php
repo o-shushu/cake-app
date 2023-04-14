@@ -153,7 +153,7 @@ class UserController extends Controller
 //カート一覧ページ
     public function indexCartPage()
     {
-        $carts = Cart::with('cake')->with('shop')->where('user_id',auth()->user()->id)->where('pay_status',0)->get();
+        $carts = Cart::with('cake')->with('shop')->where('user_id',auth()->user()->id)->where('pay_status',0)->paginate(3);
         $products = User::find(auth()->user()->id)->carts->where('pay_status',0);
 
         $subtotal = 0;

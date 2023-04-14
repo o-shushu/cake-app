@@ -6,7 +6,7 @@
                 <h2 class="pb-3 ">
                     <span class="font-bold border-t-2 border-yellow-400 text-2xl">カートページ</span>  
                 </h2>
-                <div class="w-full h-60 sm:h-40 overflow-scroll border">
+                <div>
                     <table class="w-full ">
                         <tr class="text-center text-xs sm:text-lg">
                             <th class="border-b-2 border-indigo-300 ">番号</th>
@@ -32,70 +32,75 @@
                                 <i class="fa-solid fa-circle-plus cursor-pointer" data-cart-id="{{$cart->id}}"></i>
                             </td>
                             <td class="border-b-2 border-indigo-300">{{$cart->subtotal}}</td>
-                            <td class="border-b-2 border-indigo-300" ><a class="bg-blue-400 rounded hover:bg-blue-500" href="{{ route('deleteCart', $cart->id) }}">削除</a></td>
+                            <td class="border-b-2 border-indigo-300" ><a class="bg-blue-400 rounded hover:bg-blue-500" href="{{ route('deleteCart', $cart->id) }}" onclick=" return confirm('本当に削除しますか？')">削除</a></td>
                         </tr>
                         @endforeach 
                     </table>
+                    <div>
+                        <div class="justify-center mt-6">{{ $carts->links() }}</div>
+                    </div>
                 </div>
-                <div class="justify-between flex">
-                    <div>
-                        <p style = 'color:red;'>*到着予定日を指定されない場合は当日に配達します。</p>
-                    </div>
-                    <div>
-                        @if(isset($subtotal) && isset($tax) && isset($total))
+                <div>
+                    <div class="justify-between flex">
                         <div>
-                            <label for="">小計:</label>
-                            <span>{{$subtotal}}円</span>
+                            <p style = 'color:red;'>*到着予定日を指定されない場合は当日に配達します。</p>
                         </div>
                         <div>
-                            <label for="">税金:</label>
-                            <span>{{$tax}}円</span>
-                        </div>
-                        <div>
-                            <label for="">総計:</label>
-                            <span>{{$total}}円</span>
-                        </div>
-                        @endif 
-                    </div>
-                </div>                 
-                <div class="z-10">
-                    <form method="POST" action="{{route('orderPay')}}">
-                    @csrf    
-                        <div>
-                            <div class="block sm:flex text-left">
-                                <div>
-                                    <label for="">到着予定日:</label></br>  
-                                    <input type="date" min="{{$date}}" name="appointment_time" class="form-control sale border border-gray-500 h-8 w-40 sm:w-full" value="">
-                                </div>
-                                <div>
-                                    <label for="">支払方法:</label></br> 
-                                    <select name="payment_method" class="border border-gray-500 h-8 w-40 sm:w-full">
-                                        <option value="クレジットカード">クレジットカード</option>
-                                        <option value="PayPay">PayPay</option>
-                                    </select>
-                                </div>
+                            @if(isset($subtotal) && isset($tax) && isset($total))
+                            <div>
+                                <label for="">小計:</label>
+                                <span>{{$subtotal}}円</span>
                             </div>
                             <div>
-                                <label for="">配達地:</label> 
-                                @error('delivery_place')
-                                <span style = 'color:red;'> {{ $message }}</span>
-                                @enderror
-                                <input type="text" name="delivery_place" placeholder="○○県○○市○○町○○丁目○○部屋番号" class="border border-gray-500 h-8 w-full text-sm">
+                                <label for="">税金:</label>
+                                <span>{{$tax}}円</span>
                             </div>
-                            
                             <div>
-                                <p>備考:</p>
-                                <textarea class="w-full border border-gray-500" name="content" id="" cols="80" rows=""></textarea>
-                                <input type="text" name="total_price" value="{{$total}}" class="text-right w-20 hidden" >
+                                <label for="">総計:</label>
+                                <span>{{$total}}円</span>
                             </div>
-                            <div class="my-5 w-full flex text-center gap-4">
-                                <a href="{{ url()->previous() }}"class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500 w-1/2 h-10 cursor-pointer">戻る</a>
-                                <button type="submit" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500 h-10 w-1/2" onclick=" return confirm('本当に支払いますか？')">
-                                支払
-                                </button>
-                            </div> 
+                            @endif 
                         </div>
-                    </form>
+                    </div>                 
+                    <div>
+                        <form method="POST" action="{{route('orderPay')}}">
+                        @csrf    
+                            <div>
+                                <div class="block sm:flex text-left">
+                                    <div>
+                                        <label for="">到着予定日:</label></br>  
+                                        <input type="date" min="{{$date}}" name="appointment_time" class="form-control sale border border-gray-500 h-8 w-40 sm:w-full" value="">
+                                    </div>
+                                    <div>
+                                        <label for="">支払方法:</label></br> 
+                                        <select name="payment_method" class="border border-gray-500 h-8 w-40 sm:w-full">
+                                            <option value="クレジットカード">クレジットカード</option>
+                                            <option value="PayPay">PayPay</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="">配達地:</label> 
+                                    @error('delivery_place')
+                                    <span style = 'color:red;'> {{ $message }}</span>
+                                    @enderror
+                                    <input type="text" name="delivery_place" placeholder="○○県○○市○○町○○丁目○○部屋番号" class="border border-gray-500 h-8 w-full text-sm">
+                                </div>
+                                
+                                <div>
+                                    <p>備考:</p>
+                                    <textarea class="w-full border border-gray-500" name="content" id="" cols="80" rows=""></textarea>
+                                    <input type="text" name="total_price" value="{{$total}}" class="text-right w-20 hidden" >
+                                </div>
+                                <div class="my-5 w-full flex text-center gap-4">
+                                    <a href="{{ url()->previous() }}"class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500 w-1/2 h-10 cursor-pointer">戻る</a>
+                                    <button type="submit" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500 h-10 w-1/2" onclick=" return confirm('本当に支払いますか？')">
+                                    支払
+                                    </button>
+                                </div> 
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
     </content>
