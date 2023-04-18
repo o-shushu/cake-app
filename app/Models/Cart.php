@@ -45,8 +45,7 @@ class Cart extends Model
         return Cart::where('size',$cartSize)->where('cake_id',$cartCakeId)->sum('subtotal');
     }
 
-    public function product_exist($userId)
-    {
-        return Cart::where('user_id',$userId)->where('pay_status',0);
+    public function product_exist($userId): bool{
+        return Cart::where('user_id',$userId)->where('pay_status',0)->first() !==null;
     }
 }
