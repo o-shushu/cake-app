@@ -24,7 +24,7 @@
                     <a class="h-3/4 w-3/4 mx-0" href="{{ route('home.ProductDetail', $cake->id) }}">
                         <img class="h-[90%] w-full mx-auto rounded" src="{{ asset($cakeImage->tmp_name) }}">
                     </a>
-                    <p class="mt-4">{{$cake->cake_name}}</p>
+                    <div class="mt-4">{{$cake->cake_name}}</div>
                 </div>
                 @endforeach
                 <div class="flex justify-around w-full h-1/5">
@@ -55,7 +55,7 @@
                     </div>
                     @else
                     <div class="text-2xl m-auto">
-                        <a data-cake-id="{{$cake->id}}" data-shop-id="{{$cake->shop_id}}" class="shopsInputCart cursor-pointer text-xl text-white font-semibold bg-emerald-500 hover:bg-emerald-700 px-4 py-3 rounded-lg shadow-sm">
+                        <a data-cake-id="{{$cake->id}}" data-shop-id="{{$cake->shop_id}}" class="shopsInputCart cursor-pointer text-xs lg:text-xl text-white font-semibold bg-emerald-500 hover:bg-emerald-700 px-4 py-3 rounded-lg shadow-sm">
                         カートに入れる
                         </a>
                     </div>

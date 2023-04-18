@@ -101,7 +101,7 @@
 
                             @else
                             <div class="m-auto">
-                                <a data-cake-id="{{$item->cake->id}}" data-shop-id="{{$item->cake->shop->id}}" class="shopsInputCart cursor-pointer text-xl text-white font-semibold bg-emerald-500 hover:bg-emerald-700 px-4 py-3 rounded-lg shadow-sm">
+                                <a data-cake-id="{{$item->cake->id}}" data-shop-id="{{$item->cake->shop->id}}" class="shopsInputCart cursor-pointer  text-xs lg:text-xl text-white font-semibold bg-emerald-500 hover:bg-emerald-700 px-4 py-3 rounded-lg shadow-sm">
                                 カートに入れる
                                 </a>
                             </div>

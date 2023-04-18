@@ -14,7 +14,7 @@
     
     </head>
     <body class="h-full">
-        <header class="fixed w-screen z-10">
+        <header class="fixed z-10 top-0 w-full bg-yellow-300">
             @if(auth()->check())
                 @include('layouts.guest-navigation')
             @else
@@ -29,7 +29,7 @@
         </div>
         <footer class="flex items-center bg-yellow-300 h-10 w-full relative bottom-0 mt-1/5">
             <div class="w-full text-center">
-            <i class="bi bi-0-square"></i>
+                <i class="bi bi-0-square"></i>
                 <p >© 2022 サイトDeli Cake</p>
             </div>
         </footer>  

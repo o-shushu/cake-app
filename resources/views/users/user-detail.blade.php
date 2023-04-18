@@ -27,12 +27,12 @@
                 <div class="mt-12 flex justify-around gap-10">
                     @if(auth()->user()->type === 2)
                        <div>
-                            <a href="{{ url()->previous() }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
+                            <a href="{{ route('home') }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
                             戻る
                             </a>
                        </div>
                     @else
-                        <a href="{{ url()->previous() }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
+                        <a href="{{ route('home') }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
                         戻る
                         </a>
                     @endif

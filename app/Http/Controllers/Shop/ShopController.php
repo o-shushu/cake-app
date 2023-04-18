@@ -50,6 +50,7 @@ class ShopController extends Controller
             'residence' => 'required|max:32',
             'tel' => 'required|numeric',
             'remark' => 'required',
+            'image_name' => 'required',
         ]);
 
         $shop = new Shop();
@@ -130,6 +131,13 @@ class ShopController extends Controller
 //店舗情報編集処理
     public function shopUpdateStore(Request $request)
     {
+        $request->validate([
+            'shop_name' => 'required|max:512',
+            'residence' => 'required|max:32',
+            'tel' => 'required|numeric',
+            'remark' => 'required',
+        ]);
+
         $tmp_name = $request->input('image_path');
         $image_name = $request->input('image_name');
         $image_type = $request->input('image_type');

@@ -165,8 +165,9 @@ class UserController extends Controller
         $total = $tax + $subtotal;
         $dt = new Carbon();
         $date = $dt->addDays(3)->toDateString(); // 2018-08-11
+        $pay_model = new Cart;
 
-        return view('users/user-cart', compact('carts','tax','total','subtotal','date'));
+        return view('users/user-cart', compact('carts','tax','total','subtotal','date','pay_model'));
     }
 
 //カートから削除
