@@ -94,10 +94,16 @@
                                 </div>
                                 <div class="my-5 w-full flex text-center gap-4">
                                     <a href="{{ url()->previous() }}"class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500 w-1/2 h-10 cursor-pointer">戻る</a>
+                                    @if($pay_model->product_exist(Auth::user()->id))
                                     <button type="submit" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500 h-10 w-1/2" onclick=" return confirm('本当に支払いますか？')">
                                     支払
                                     </button>
-                                </div> 
+                                    @else
+                                    <button type="text" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500 h-10 w-1/2" onclick=" return confirm('商品を入れてください。')">
+                                    支払
+                                    </button>
+                                    @endif
+                                </div>      
                             </div>
                         </form>
                     </div>

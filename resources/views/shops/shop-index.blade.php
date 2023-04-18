@@ -9,6 +9,7 @@
                         @if(isset($image_path))
                             <img src="{{asset($image_path)}}">
                         @endif
+                        <p class="text-red-500">{{ $errors->first('image_name') }}</p>
                         <form method="POST" action="{{ route('shop.confirm') }}" enctype="multipart/form-data" class="text-center">
                             @csrf
                             <input class="my-6" type="file" name="image">
@@ -24,22 +25,26 @@
                             @endif
                             <div>
                                 <label for="">店舗ネーム</label>
-                                <input type="text" name="shop_name" class="w-4/5 h-10 my-4 rounded">
+                                <p class="text-red-500">{{ $errors->first('shop_name') }}</p>
+                                <input type="text" name="shop_name" class="w-4/5 h-10 my-4 rounded" value="{{old('shop_name')}}">
                             </div>
 
                             <div>
                                 <label for="">店舗アドレス</label>
-                                <input type="text" name="residence" placeholder="○○県○○市○○区○○町" class="w-4/5 h-10 my-4 rounded" >
+                                <p class="text-red-500">{{ $errors->first('residence') }}</p>
+                                <input type="text" name="residence" placeholder="○○県○○市○○区○○町" class="w-4/5 h-10 my-4 rounded" value="{{old('residence')}}">
                             </div>
 
                             <div>
                                 <label for="">電話番号</label>
-                                <input type="text" name="tel" class="w-4/5 h-10 my-4 rounded">
+                                <p class="text-red-500">{{ $errors->first('tel') }}</p>
+                                <input type="text" name="tel" class="w-4/5 h-10 my-4 rounded" value="{{old('tel')}}">
                             </div>
 
                             <div>
-                                <label for="">備考</label>
-                                <textarea name="remark" id="" cols="30" rows="10" placeholder="店舗紹介" class="w-4/5 my-4 rounded"></textarea>
+                                <label for="">概要</label>
+                                <p class="text-red-500">{{ $errors->first('remark') }}</p>
+                                <textarea name="remark" id="" cols="30" rows="10" placeholder="店舗紹介" class="w-4/5 my-4 rounded">{{old('remark')}}</textarea>
                             </div>
                             <div class="text-center bg-blue-500 rounded h-8">
                                 <button class="w-full h-8">登録</button>

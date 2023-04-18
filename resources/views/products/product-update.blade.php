@@ -26,9 +26,7 @@
                     @endif
                     <div class="p-2 text-left"> 
                         <label for="">詳細</label><br/>
-                        <textarea id="story" name="cake_content" rows="5" cols="48" maxlength="512" value="{{ $cake->cake_content }}" class="h-10 w-full">
-                        {{ $cake->cake_content }}
-                        </textarea>
+                        <textarea id="story" name="cake_content" rows="5" cols="48" maxlength="512" value="{{ $cake->cake_content }}" class="h-10 w-full">{{ $cake->cake_content }}</textarea>
                     </div>
                     
                     <div class="p-2 text-left">

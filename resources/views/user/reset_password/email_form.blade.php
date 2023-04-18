@@ -10,7 +10,7 @@
                 @csrf
                 <div class="mt-3">
                     <label class="font-bold" for="email">メールアドレス</label>
-                    <input type="text" name="email" id="email" value="{{ old('email') }}">
+                    <input type="text" name="email" id="email" value="{{ old('email') }}" class="border border-gray-400 p-2 w-full">
                 </div>
                 <button class="w-full mt-3 bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 mr-20">再設定用メールを送信</button>
             </form>

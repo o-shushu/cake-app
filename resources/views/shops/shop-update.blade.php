@@ -31,21 +31,25 @@
                         @foreach($information as $item)
                             <div class="p-2">
                                 <label for="">店舗ネーム:</label></br>
+                                <p class="text-red-500">{{ $errors->first('shop_name') }}</p>
                                 <input type="text" name="shop_name" value="{{ $item->shop_name }}" class="h-10 w-full">
                             </div>
 
                             <div class="p-2"> 
                                 <label for="">アドレス:</label></br>
+                                <p class="text-red-500">{{ $errors->first('residence') }}</p>
                                 <input type="text" name="residence" value="{{ $item->residence }}" class="h-10 w-full">
                             </div>
 
                             <div class="p-2"> 
                                 <label for="">電話番号:</label></br>
+                                <p class="text-red-500">{{ $errors->first('tel') }}</p>
                                 <input type="text" name="tel" value="{{ $item->tel }}" class="h-10 w-full">
                             </div>
 
                             <div class="p-2"> 
                                 <label for="">概要:</label></br>
+                                <p class="text-red-500">{{ $errors->first('remark') }}</p>
                                 <textarea id="story" name="remark" rows="5" cols="48" maxlength="512" value="{{ $item->remark }}" class="h-20 w-full">{{ $item->remark }}
                                 </textarea>
                             </div>

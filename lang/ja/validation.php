@@ -159,6 +159,15 @@ return [
         'email' => 'メールアドレス',
         'password' => 'パスワード',
         'tel' => '電話番号',
+        'shop_name' => '店舗ネーム',
+        'residence' => '店舗アドレス',
+        'remark' => '概要',
+        'image_name' => '画像',
+        'cake_name' => '商品名',
+        'cake_category' => 'カテゴリー',
+        'cakecontent.*.cake_size' => '商品サイズ',
+        'cakecontent.*.cake_price' => '商品価格',
+        'cake_content' => '商品詳細',
     ],
 
 ];

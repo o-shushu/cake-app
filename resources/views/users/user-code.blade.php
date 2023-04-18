@@ -34,7 +34,7 @@
             @endforeach
         </table>
         <div class="mt-10">
-            <a href="{{ url()->previous() }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
+            <a href="{{ route('home') }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
             戻る
             </a>
         </div>  

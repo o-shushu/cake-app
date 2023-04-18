@@ -27,9 +27,15 @@
                 </div>
         </div>
             <div class="mt-5 flex gap-2 justify-around">
+                @if(auth()->user()->type === '0')
                 <a href="{{ url()->previous() }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
                     戻る
                 </a>
+                @else
+                <a href="{{ route('home') }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
+                    戻る
+                </a>
+                @endif
                 <a href="{{ route('shop.Update',$item->id) }}" class="bg-blue-400 text-white rounded py-2.5 px-6 hover:bg-blue-500">
                     変更
                 </a>

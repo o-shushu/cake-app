@@ -16,11 +16,11 @@
             <input type="hidden" name="reset_token" value="{{ $userToken->token }}">
             <div class="input-group">
                 <label for="password" class="label font-bold">パスワード</label>
-                <input type="password" name="password" class="input {{ $errors->has('password') ? 'incorrect' : '' }} w-full">
+                <input type="password" name="password" class="input {{ $errors->has('password') ? 'incorrect' : '' }} w-full border border-gray-400 p-2">
             </div>
             <div class="input-group">
                 <label for="password_confirmation" class="label font-bold">パスワードを再入力</label>
-                <input type="password" name="password_confirmation" class="input {{ $errors->has('password_confirmation') ? 'incorrect' : '' }} w-full">
+                <input type="password" name="password_confirmation" class="input {{ $errors->has('password_confirmation') ? 'incorrect' : '' }} w-full border border-gray-400 p-2">
             </div>
             <button type="submit" class="w-full mt-3 bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 mr-20">パスワードを再設定</button>
         </form>

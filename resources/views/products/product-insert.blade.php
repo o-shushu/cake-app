@@ -12,6 +12,7 @@
                 @if(isset($image_path))
                     <img class="w-4/5 mx-auto" src="{{asset($image_path)}}">
                 @endif
+                <p class="text-red-500">{{ $errors->first('image_name') }}</p>
                 <form method="POST" action="{{ route('upload.confirm') }}" enctype="multipart/form-data">
                     @csrf
                     <input class="text-xs w-full my-6" type="file" name="image">
@@ -29,33 +30,28 @@
 
                     @endif
                     <div class="p-2 text-left"> 
+                        <p class="text-red-500">{{ $errors->first('cake_content') }}</p> 
                         <label for="">詳細:</label><br/>
-                        <textarea id="story" name="cake_content" rows="5" cols="48" maxlength="512" class="h-10 w-full"></textarea>
+                        <textarea id="story" name="cake_content" rows="5" cols="48" maxlength="512" class="h-10 w-full">{{old('cake_content')}}</textarea>
                     </div>
                     
                     <div class="p-2 text-left">                                
-                        @error('cake_name')
-                            <p class="text-red-500"> {{ $message }}</p>
-                        @enderror  
+                        <p class="text-red-500">{{ $errors->first('cake_name') }}</p> 
                         <label for="">商品名:</label>
-                        <input type="text" name="cake_name" class="h-10 w-full">
+                        <input type="text" name="cake_name" class="h-10 w-full" value="{{old('cake_name')}}">
                     </div>
 
                     <div class="p-2 text-left">
-                        @error('cake_category')
-                            <p class="text-red-500"> {{ $message }}</p>
-                        @enderror  
+                        <p class="text-red-500">{{ $errors->first('cake_category') }}</p> 
                         <label for="">カテゴリー:</label>
-                        <input type="text" name="cake_category" class="h-10 w-full">
+                        <input type="text" name="cake_category" class="h-10 w-full" value="{{old('cake_category')}}">
                     </div>
         
                     <div id="form_area">
-                        @error('cakecontent.*.cake_size')
-                            <p class="text-red-500"> {{ $message }}</p>
-                        @enderror
-                        @error('cakecontent.*.cake_price')
-                            <p class="text-red-500"> {{ $message }}</p>
-                        @enderror 
+                        <div class="p-2 text-left">
+                            <p class="text-red-500">{{ $errors->first('cakecontent.*.cake_size') }}</p>
+                            <p class="text-red-500">{{ $errors->first('cakecontent.*.cake_price') }}</p>
+                        </div>
                         <div class="p-2 text-left">価格とサイズ:</div>
                         <input type="text" id="inputprice_0" name="cakecontent[0][cake_price]" class="rounded" placeholder="価格-0">
                         <input type="text" id="inputsize_0" name="cakecontent[0][cake_size]" class="rounded" placeholder="サイズ-0">

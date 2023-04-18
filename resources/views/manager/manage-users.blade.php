@@ -27,7 +27,7 @@
                     <td>
                         <a href="{{route('shop.detail',$user->id)}}" class="bg-green-400 rounded hover:bg-green-500">店舗情報</a>
                         <a href="{{route('consumers.update',$user->id)}}" class="bg-blue-400 rounded hover:bg-blue-500">編集</a>
-                        <a href="{{route('delete.User',$user->id)}}" class="bg-red-400 rounded hover:bg-red-500">削除</a>
+                        <a href="{{route('delete.User',$user->id)}}" class="bg-red-400 rounded hover:bg-red-500" onclick=" return confirm('本当に削除しますか？')">削除</a>
                     </td>
                 </tr>
                 @endforeach
@@ -56,7 +56,7 @@
                     <td>{{ $user->residence->residence}}</td>
                     <td>
                         <a href="{{route('consumers.update',$user->id)}}" class="bg-blue-400 rounded hover:bg-blue-500">編集</a>
-                        <a href="{{route('delete.User',$user->id)}}" class="bg-red-400 rounded hover:bg-red-500">削除</a>
+                        <a href="{{route('delete.User',$user->id)}}" class="bg-red-400 rounded hover:bg-red-500" onclick=" return confirm('本当に削除しますか？')">削除</a>
                     </td>
                 </tr>
                 @endforeach

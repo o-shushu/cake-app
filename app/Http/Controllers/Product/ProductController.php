@@ -104,6 +104,7 @@ class ProductController extends Controller
             'cake_content' => 'required|max:512',
             'cakecontent.*.cake_price' => 'required|numeric',
             'cakecontent.*.cake_size' => 'required',
+            'image_name' => 'required',
         ]);
         
         DB::beginTransaction();
