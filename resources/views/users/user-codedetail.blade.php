@@ -13,7 +13,7 @@
 
             <p class="text-lg">店舗名:{{$item->shop->shop_name}}</p>
             @if($item->order_status == null)
-                <p class="text-lg">注文状態：<span class="bg-red-300 rounded">未開始</span></p>
+                <p class="text-lg">注文状態：<span class="bg-red-300 rounded">準備中</span></p>
             @else
                 <p class="text-lg">注文状態：<span class="bg-red-300 rounded">{{$item->order_status}}</span></p>
             @endif

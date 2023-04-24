@@ -268,10 +268,10 @@ class ProductController extends Controller
         }
         ,'order.user'])->get();
         $orderStatus = [
-            ['status' => '未開始'],
-            ['status' => '作る中'],
+            ['status' => '準備中'],
+            ['status' => '製作中'],
             ['status' => '配達中'],
-            ['status' => '到着済み']
+            ['status' => '配達済み']
         ];
 
         return view('products/product-order',compact('carts', 'is_reserved','shop','orderStatus'));
