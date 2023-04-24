@@ -20,7 +20,10 @@ return new class extends Migration
             $table->string('cake_category', 32)->comment('カテゴリー');
             $table->string('cake_content', 512)->comment('ケーキ詳細');
             $table->timestamps();
+
+            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
         });
+
     }
 
     /**
