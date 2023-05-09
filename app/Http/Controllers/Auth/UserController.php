@@ -70,13 +70,10 @@ class UserController extends Controller
         $type = $userInformation->type;
         
         if($type == 2){
-            $user = 'shopkeepers';
-            $users = User::where('type',2)->paginate(10);
-            return view('manager/manage-users',compact('users','user'));
+            return redirect('manage/shopkeepers');
         }
 
-        $users = User::where('type',1)->paginate(10);
-        return view('manager/manage-users',compact('users'));
+        return redirect('manage/consumers');
     }
 
 //商品詳細ページからカートに入れる

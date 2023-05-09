@@ -23,14 +23,14 @@ class LikeSeeder extends Seeder
             for($i=0; $i<10; $i++){
                 DB::table('likes')->insert([
                     [
-                        'user_id' => rand(17,31),
+                        'user_id' => rand(12,26),
                         'cake_id' => null,
                         'shop_id' => $shop->id,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now(),
                     ],
                     [
-                        'user_id' => rand(17,31),
+                        'user_id' => rand(12,26),
                         'cake_id' => rand(1,50),
                         'shop_id' => null,
                         'created_at' => Carbon::now(),

@@ -16,6 +16,10 @@ class ShopSeeder extends Seeder
     public function run()
     {
         Shop::factory(1)->create([
+            'user_id' => 2
+        ]);
+
+        Shop::factory(1)->create([
             'user_id' => 3
         ]);
 
@@ -49,10 +53,6 @@ class ShopSeeder extends Seeder
 
         Shop::factory(1)->create([
             'user_id' => 11
-        ]);
-        
-        Shop::factory(1)->create([
-            'user_id' => 12
         ]);
     }
 }

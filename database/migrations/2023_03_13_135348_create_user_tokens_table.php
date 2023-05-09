@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('token')->unique()->comment('トークン');
             $table->dateTime('expire_at')->nullable()->comment('トークンの有効期限');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
         DB::statement("ALTER TABLE user_tokens COMMENT 'ユーザートークン'");
     }

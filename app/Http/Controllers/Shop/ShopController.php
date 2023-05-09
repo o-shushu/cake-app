@@ -47,7 +47,7 @@ class ShopController extends Controller
     {
         $request->validate([
             'shop_name' => 'required|max:512',
-            'residence' => 'required|max:32',
+            'residence' => 'required|max:255',
             'tel' => 'required|numeric',
             'remark' => 'required',
             'image_name' => 'required',
@@ -133,7 +133,7 @@ class ShopController extends Controller
     {
         $request->validate([
             'shop_name' => 'required|max:512',
-            'residence' => 'required|max:32',
+            'residence' => 'required|max:255',
             'tel' => 'required|numeric',
             'remark' => 'required',
         ]);

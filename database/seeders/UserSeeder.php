@@ -25,34 +25,14 @@ class UserSeeder extends Seeder
             'type' => 0
 
         ]);
-        //会員ユーザー
-        User::create([
-            'name' => '田辺 香織',
-            'email' => 'sakura@s89fbavi.shop',
-            'password' =>'password',
-            'tel' => '09084300866',
-            'residence_id' => 1,
-            'type' => 1
-
-        ]);
-        //営業ユーザー
-        User::create([
-            'name' => '宮沢 学',
-            'email' => 'kumiko63@ito.com',
-            'password' =>'password',
-            'tel' => '09006746119',
-            'residence_id' => 2,
-            'type' => 2
-
-        ]);
         
         //営業ユーザー
-        User::factory(14)->create([
+        User::factory(10)->create([
             'type' => 2
         ]);
 
         //会員ユーザー
-        User::factory(14)->create([
+        User::factory(15)->create([
             'type' => 1
         ]);
     }
